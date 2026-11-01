@@ -1,0 +1,12 @@
+# Runtime dependencies (mirrors [project.dependencies] in pyproject.toml)
+aiohttp>=3.9
+mss>=9.0
+Pillow>=10.0
+qrcode>=7.4
+numpy>=1.24
+# GPU pipeline: DXGI screen capture and hardware H.264 encoding (NVENC / Quick Sync / AMF)
+dxcam>=0.3
+av>=14.0
+# Desktop shell: dashboard window and tray icon
+pywebview>=5.0
+pystray>=0.19

@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dancermd"
+dynamic = ["version"]
+description = "Control a Windows PC from your phone's browser: GPU-accelerated screen streaming, touch input and an Alt+Tab window switcher."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Phạm Phúc Duy" }]
+requires-python = ">=3.10"
+keywords = ["remote-desktop", "remote-control", "windows", "webcodecs", "h264", "nvenc"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows :: Windows 10",
+    "Operating System :: Microsoft :: Windows :: Windows 11",
+    "Programming Language :: Python :: 3",
+    "Topic :: System :: Remote Desktop",
+]
+dependencies = [
+    "aiohttp>=3.9",
+    "mss>=9.0",
+    "Pillow>=10.0",
+    "qrcode>=7.4",
+    "numpy>=1.24",
+    "dxcam>=0.3",
+    "av>=14.0",
+    "pywebview>=5.0",
+    "pystray>=0.19",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "pyinstaller>=6"]
+
+[project.urls]
+Homepage = "https://duypham-dev.github.io/DanceRMD/"
+Repository = "https://github.com/duypham-dev/DanceRMD"
+Issues = "https://github.com/duypham-dev/DanceRMD/issues"
+Changelog = "https://github.com/duypham-dev/DanceRMD/blob/main/CHANGELOG.md"
+
+[project.gui-scripts]
+dancermd = "dancermd.__main__:run"
+
+[project.scripts]
+dancermd-server = "dancermd.cli:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "dancermd.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["dancermd*"]
+
+[tool.setuptools.package-data]
+dancermd = ["web/**/*", "resources/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+extend-exclude = ["website"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM"]
+ignore = [
+    "E731",   # small lambdas as callbacks read better than nested defs
+    "SIM105", # explicit try/except/pass around Win32 calls
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["dancermd"]
