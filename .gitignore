@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Build output (scripts/build.py)
+build/
+dist/
+*.spec
+
+# Local settings and logs, never commit an access code
+config.json
+*.log
+
+# Editors and OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
