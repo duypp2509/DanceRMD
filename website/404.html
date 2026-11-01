@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — DanceRMD</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0c0907">
+<meta name="color-scheme" content="dark">
+<!-- GitHub Pages serves this file for any missing path, so asset URLs are resolved from the site root.
+     Change the base href if the site moves (e.g. to "/" on a custom domain). -->
+<base href="/DanceRMD/">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
+<style>
+  /* Self-contained so it renders even if the main stylesheet path differs. */
+  :root { --bg: #0c0907; --text: #f6efe9; --muted: #a8998c; --accent: #ff8a3d; --amber: #ffb238; --ink: #1b0e04; --line: #45342a; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; display: grid; place-items: center; padding: 24px 16px;
+    background: radial-gradient(50% 45% at 50% 40%, rgba(255, 110, 40, .22), transparent 70%), var(--bg);
+    color: var(--text); font: 400 16px/1.6 "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    text-align: center; -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 520px; }
+  .code {
+    margin: 0; font-size: clamp(5rem, 22vw, 9rem); font-weight: 800; line-height: 1; letter-spacing: -0.05em;
+    background: linear-gradient(90deg, #ff5a1f, #ff8a3d 45%, #ffb238); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  h1 { margin: 12px 0 10px; font-size: clamp(1.6rem, 5vw, 2.2rem); letter-spacing: -0.02em; }
+  p { margin: 0; color: var(--muted); }
+  .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
+  a.btn {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px;
+    border-radius: 12px; border: 1px solid transparent; font-weight: 700; text-decoration: none;
+  }
+  .btn-primary { background: var(--accent); color: var(--ink); }
+  .btn-primary:hover { background: #ff9d57; }
+  a.btn-outline { border-color: rgba(255, 178, 56, .45); color: var(--amber); }
+  a.btn-outline:hover { border-color: var(--amber); }
+  a:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="code" aria-hidden="true">404</p>
+  <h1>This page wandered off</h1>
+  <p>The link may be broken or the page may have moved. Let's get you back to controlling your PC.</p>
+  <div class="actions">
+    <a class="btn btn-primary" href="./">Back to DanceRMD</a>
+    <a class="btn btn-outline" href="https://github.com/duypham-dev/DanceRMD">View on GitHub</a>
+  </div>
+</main>
+</body>
+</html>

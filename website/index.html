@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DanceRMD — Control your Windows PC from your phone</title>
+<meta name="description" content="DanceRMD streams your Windows laptop to any phone browser with GPU-accelerated H.264 and turns your touchscreen into a touchpad, keyboard and Alt+Tab window switcher. Free and open source.">
+<meta name="theme-color" content="#0c0907">
+<meta name="color-scheme" content="dark">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DanceRMD">
+<meta property="og:title" content="DanceRMD — Your Windows PC, at your fingertips">
+<meta property="og:description" content="Control your laptop from any phone browser. GPU streaming, a real touchpad, Alt+Tab for touch and secure remote access. Nothing to install on the phone.">
+<meta property="og:url" content="https://duypham-dev.github.io/DanceRMD/">
+<meta property="og:image" content="https://duypham-dev.github.io/DanceRMD/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DanceRMD logo with the tagline: Your Windows PC, at your fingertips.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DanceRMD — Your Windows PC, at your fingertips">
+<meta name="twitter:description" content="Control your laptop from any phone browser. GPU streaming, a real touchpad and Alt+Tab for touch.">
+<meta name="twitter:image" content="https://duypham-dev.github.io/DanceRMD/assets/og-card.png">
+
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon-32.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+<script>document.documentElement.classList.replace('no-js', 'js');</script>
+<script src="js/main.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "DanceRMD",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Windows 10, Windows 11",
+  "description": "Control a Windows laptop from any phone browser with GPU-accelerated streaming, touch input and an Alt+Tab style window switcher.",
+  "license": "https://opensource.org/licenses/MIT",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Phạm Phúc Duy" }
+}
+</script>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 10h4v4h-4zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-signal" viewBox="0 0 24 24"><path d="M5 18v-2M9.5 18v-5M14 18v-8M18.5 18V6"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></symbol>
+  <symbol id="i-touch" viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11M12 10.5V9a1.5 1.5 0 0 1 3 0v2M15 10.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.6-2.2L4.6 16a1.6 1.6 0 0 1 2.4-2.1L9 15.5"/></symbol>
+  <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></symbol>
+  <symbol id="i-windows" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></symbol>
+  <symbol id="i-rotate" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M17 12h.01M7 3.5A9 9 0 0 1 16 3l1 1M7 20.5a9 9 0 0 0 9 .5l1-1"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+  <symbol id="i-tray" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M14 21h3M20 18v3"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 18a9 9 0 1 1 16 0"/><path d="M12 13l4-4"/><circle cx="12" cy="14" r="1"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></symbol>
+  <symbol id="i-admin" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M12 8v5M12 16h.01"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 6.1A10 10 0 0 1 12 6c5 0 9 6 9 6a17 17 0 0 1-2.6 3.2M6.5 7.6A17 17 0 0 0 3 12s4 6 9 6a9 9 0 0 0 3.7-.8"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a5 5 0 0 1-.5-10A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9H7z"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></symbol>
+  <symbol id="i-mouse" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="6"/><path d="M12 7v4"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h15M15 4l4 4-4 4M20 16H5M9 12l-4 4 4 4"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-cursor" viewBox="0 0 24 24"><path fill="#fff" stroke="#120d0a" stroke-width="1.5" stroke-linejoin="round" d="M5 3v15l4-3.6 2.8 6.1 2.5-1.1-2.7-6H17z"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a class="brand" href="#top" aria-label="DanceRMD home">
+      <img src="assets/logo-64.png" width="36" height="36" alt="">
+      <span>Dance<b>RMD</b></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <svg class="i i-open" aria-hidden="true"><use href="#i-menu"/></svg>
+      <svg class="i i-close" aria-hidden="true"><use href="#i-x"/></svg>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="https://github.com/duypham-dev/DanceRMD" data-repo="">
+          <svg class="i" aria-hidden="true"><use href="#i-github"/></svg>GitHub
+        </a>
+        <a class="btn btn-primary" href="https://github.com/duypham-dev/DanceRMD/releases/latest" data-repo="/releases/latest">
+          <svg class="i" aria-hidden="true"><use href="#i-download"/></svg>Download
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ============================== Hero ============================== -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-ambience" aria-hidden="true">
+      <div class="hero-glow"></div>
+      <div class="hero-rain" data-rain></div>
+    </div>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span>Free &amp; open source · Windows 10/11</p>
+        <h1 id="hero-title">
+          <span class="gradient-text">Your Windows PC,</span>
+          <span class="hero-line2">at your fingertips.</span>
+        </h1>
+        <p class="lead">DanceRMD streams your laptop to any phone browser with GPU-accelerated video and turns the
+          touchscreen into a precise touchpad, keyboard and window switcher. Scan a QR code — there is nothing to
+          install on the phone.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="https://github.com/duypham-dev/DanceRMD/releases/latest" data-repo="/releases/latest">
+            <svg class="i" aria-hidden="true"><use href="#i-download"/></svg>Download for Windows
+          </a>
+          <a class="btn btn-outline btn-lg" href="https://github.com/duypham-dev/DanceRMD" data-repo="">
+            <svg class="i" aria-hidden="true"><use href="#i-github"/></svg>View on GitHub
+          </a>
+        </div>
+        <p class="cta-note">Windows 10/11, 64-bit · Installs per user, no admin rights · MIT licensed</p>
+      </div>
+
+      <div class="hero-visual" role="img" aria-label="A laptop showing a code editor and a mail window, mirrored live on a phone running the DanceRMD touchpad interface.">
+        <div class="laptop" aria-hidden="true">
+          <div class="laptop-lid">
+            <div class="laptop-screen">
+              <div class="desk">
+                <div class="desk-in">
+                  <div class="desk-win desk-win--code">
+                    <div class="dw-bar"><i class="app app--code"></i><span>main.py — Code</span><i class="dw-ctl"></i></div>
+                    <div class="dw-body dw-code">
+                      <i class="ln" style="--w:46%;--c:var(--syn-kw)"></i>
+                      <i class="ln ln-in" style="--w:62%;--c:var(--syn-fn)"></i>
+                      <i class="ln ln-in2" style="--w:38%;--c:var(--syn-str)"></i>
+                      <i class="ln ln-in2" style="--w:55%;--c:var(--syn-tx)"></i>
+                      <i class="ln ln-in" style="--w:30%;--c:var(--syn-kw)"></i>
+                      <i class="ln" style="--w:0%"></i>
+                      <i class="ln" style="--w:52%;--c:var(--syn-fn)"></i>
+                      <i class="ln ln-in" style="--w:70%;--c:var(--syn-tx)"></i>
+                      <i class="ln ln-in" style="--w:44%;--c:var(--syn-str)"></i>
+                      <i class="ln ln-in2" style="--w:58%;--c:var(--syn-tx)"></i>
+                    </div>
+                  </div>
+                  <div class="desk-win desk-win--mail">
+                    <div class="dw-bar"><i class="app app--mail"></i><span>Inbox — Mail</span><i class="dw-ctl"></i></div>
+                    <div class="dw-body dw-mail">
+                      <i class="mrow is-unread"></i><i class="mrow"></i><i class="mrow is-unread"></i><i class="mrow"></i><i class="mrow"></i>
+                    </div>
+                  </div>
+                  <div class="desk-taskbar">
+                    <i class="tb-start"></i><i class="app app--code"></i><i class="app app--mail"></i><i class="app app--word"></i><i class="app app--web"></i>
+                    <span class="tb-clock">21:34</span>
+                  </div>
+                  <svg class="desk-cursor"><use href="#i-cursor"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="laptop-base"><span></span></div>
+        </div>
+
+        <div class="phone phone--hero" aria-hidden="true">
+          <div class="phone-screen">
+            <div class="pui">
+              <div class="pui-top"><i class="pui-dot"></i><b>DESKTOP-DANCE</b><span class="pui-batt">82%</span></div>
+              <div class="pui-surface">
+                <div class="desk">
+                  <div class="desk-in">
+                    <div class="desk-win desk-win--code">
+                      <div class="dw-bar"><i class="app app--code"></i><span>main.py — Code</span></div>
+                      <div class="dw-body dw-code">
+                        <i class="ln" style="--w:46%;--c:var(--syn-kw)"></i>
+                        <i class="ln ln-in" style="--w:62%;--c:var(--syn-fn)"></i>
+                        <i class="ln ln-in2" style="--w:38%;--c:var(--syn-str)"></i>
+                        <i class="ln ln-in2" style="--w:55%;--c:var(--syn-tx)"></i>
+                        <i class="ln ln-in" style="--w:30%;--c:var(--syn-kw)"></i>
+                      </div>
+                    </div>
+                    <div class="desk-win desk-win--mail">
+                      <div class="dw-bar"><i class="app app--mail"></i><span>Inbox — Mail</span></div>
+                      <div class="dw-body dw-mail"><i class="mrow is-unread"></i><i class="mrow"></i><i class="mrow is-unread"></i></div>
+                    </div>
+                    <div class="desk-taskbar"><i class="tb-start"></i><i class="app app--code"></i><i class="app app--mail"></i></div>
+                    <svg class="desk-cursor"><use href="#i-cursor"/></svg>
+                    <span class="touch"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="pui-dock">
+                <div class="pui-strip">
+                  <span class="pchip pchip--all"><svg><use href="#i-windows"/></svg>All</span>
+                  <span class="pchip is-active"><i class="app app--code"></i>main.py</span>
+                  <span class="pchip"><i class="app app--mail"></i>Inbox</span>
+                </div>
+                <div class="pui-mouse"><span>Left click</span><span>Right click</span></div>
+                <div class="pui-seg"><span class="is-on">Touchpad</span><span>Direct touch</span></div>
+              </div>
+              <div class="pui-tabs">
+                <span class="is-on"><svg><use href="#i-mouse"/></svg>Mouse</span>
+                <span><svg><use href="#i-keyboard"/></svg>Keys</span>
+                <span><svg><use href="#i-windows"/></svg>Windows</span>
+                <span><svg><use href="#i-laptop"/></svg>System</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-badge hero-badge--gpu" aria-hidden="true"><svg class="i"><use href="#i-chip"/></svg><span><b>H.264 · NVENC</b>30 fps, GPU encoded</span></div>
+        <div class="hero-badge hero-badge--lat" aria-hidden="true"><svg class="i"><use href="#i-signal"/></svg><span><b>Over 4G</b>HTTPS tunnel</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== Trust strip ============================== -->
+  <section class="strip" aria-label="Highlights">
+    <ul class="container strip-list">
+      <li><svg class="i" aria-hidden="true"><use href="#i-chip"/></svg>GPU-accelerated H.264</li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>Nothing to install on the phone</li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-globe"/></svg>Works on Wi‑Fi or 4G</li>
+      <li><svg class="i" aria-hidden="true"><use href="#i-code"/></svg>Open source · MIT</li>
+    </ul>
+  </section>
+
+  <!-- ============================== Features ============================== -->
+  <section class="section" id="features" aria-labelledby="features-title">
+    <div class="container">
+      <header class="section-head reveal">
+        <p class="kicker">Features</p>
+        <h2 id="features-title">Everything you need to drive your PC from the couch</h2>
+        <p class="section-sub">Built for real use on a small touchscreen: fast video, precise input and the shortcuts
+          you reach for every day.</p>
+      </header>
+      <ul class="feature-grid">
+        <li class="feature reveal">
+          <span class="feature-icon"><svg class="i" aria-hidden="true"><use href="#i-bolt"/></svg></span>
+          <h3>Streams at GPU speed</h3>
+          <p>DXGI Desktop Duplication captures the screen and NVIDIA NVENC, Intel Quick Sync or AMD AMF encode H.264,
+            decoded on the phone with WebCodecs. JPEG fallback, quality presets and flow control that adapts to the network.</p>
+        </li>
+        <li class="feature reveal">
+          <span class="feature-icon"><svg class="i" aria-hidden="true"><use href="#i-touch"/></svg></span>
+          <h3>A touchpad that feels right</h3>
+          <p>Pointer acceleration, tap and double-tap, two-finger scroll and right-click, pinch-to-zoom and long-press
+            drag. Prefer pointing? Switch to direct touch and tap exactly where you want to click.</p>
+        </li>
+        <li class="feature reveal">
+          <span class="feature-icon"><svg class="i" aria-hidden="true"><use href="#i-keyboard"/></svg></span>
+          <h3>Type in any language</h3>
+          <p>Live typing sends exactly what your phone keyboard produces — Vietnamese and other IMEs, autocorrect,
+            emoji. Sticky Ctrl/Alt/Shift/Win, F-keys and 20+ one-tap shortcuts.</p>
+        </li>
+        <li class="feature reveal">
+          <span class="feature-icon"><svg class="i" aria-hidden="true"><use href="#i-windows"/></svg></span>
+          <h3>Alt+Tab for your thumb</h3>
+          <p>A window switcher with live thumbnails and app icons. Jump, close or show the desktop in one tap — or
+            swipe three fingers sideways to flip back to the previous window.</p>
+        </li>
+        <li class="feature reveal">
+          <span class="feature-icon"><svg class="i" aria-hidden="true"><use href="#i-rotate"/></svg></span>
+          <h3>Made for landscape</h3>
+          <p>Turn the phone sideways and the laptop screen fills the display. Controls move to a slim side rail and
+            open as drawers only when you need them.</p>
+        </li>
+        <li class="feature reveal">
+          <span class="feature-icon"><svg class="i" aria-hidden="true"><use href="#i-sliders"/></svg></span>
+          <h3>System controls</h3>
+          <p>Media keys and volume, laptop brightness, two-way clipboard, open a link on the laptop, and lock, sleep,
+            hibernate, restart or shut down — with a confirmation for anything disruptive.</p>
+        </li>
+        <li class="feature reveal">
+          <span class="feature-icon"><svg class="i" aria-hidden="true"><use href="#i-globe"/></svg></span>
+          <h3>Reach it from anywhere</h3>
+          <p>One switch opens an encrypted Cloudflare tunnel with an HTTPS link. No port forwarding, no router setup,
+            no account — and HTTPS unlocks hardware H.264 on the phone.</p>
+        </li>
+        <li class="feature reveal">
+          <span class="feature-icon"><svg class="i" aria-hidden="true"><use href="#i-tray"/></svg></span>
+          <h3>Lives quietly in the tray</h3>
+          <p>A native Windows app with a tray icon, Start menu entry and optional autostart. Installs per user in
+            seconds and uninstalls cleanly from Settings → Apps.</p>
+        </li>
+        <li class="feature reveal">
+          <span class="feature-icon"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span>
+          <h3>Secure by default</h3>
+          <p>A private access token in the QR code, brute-force protection and a control dashboard that only opens
+            on the laptop itself. Rotate the token or disconnect a device any time.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================== How it works ============================== -->
+  <section class="section section--alt" id="how" aria-labelledby="how-title">
+    <div class="container">
+      <header class="section-head reveal">
+        <p class="kicker">How it works</p>
+        <h2 id="how-title">Up and running in under a minute</h2>
+      </header>
+      <ol class="steps">
+        <li class="step reveal">
+          <span class="step-num" aria-hidden="true">1</span>
+          <span class="step-icon"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></span>
+          <h3>Install on Windows</h3>
+          <p>Download <code>DanceRMD.exe</code> and open it. It installs to your Start menu without admin rights and
+            keeps running in the system tray.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num" aria-hidden="true">2</span>
+          <span class="step-icon"><svg class="i" aria-hidden="true"><use href="#i-qr"/></svg></span>
+          <h3>Scan the QR code</h3>
+          <p>Point your phone's camera at the code in the DanceRMD window. The link carries your private access token,
+            so the phone connects straight away.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num" aria-hidden="true">3</span>
+          <span class="step-icon"><svg class="i" aria-hidden="true"><use href="#i-touch"/></svg></span>
+          <h3>Take control</h3>
+          <p>Use the touchpad, keyboard, window switcher and system panel. Leaving the house? Turn on remote access
+            and scan the new HTTPS code.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================== Deep dive: window switcher ============================== -->
+  <section class="section" id="switcher" aria-labelledby="switcher-title">
+    <div class="container split">
+      <div class="split-copy reveal">
+        <p class="kicker">Window switcher</p>
+        <h2 id="switcher-title">Alt+Tab, made for your thumb</h2>
+        <p class="section-sub">Every open window, in the same order Windows uses, with a live preview so you pick the
+          right one at a glance.</p>
+        <ul class="checks">
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Live thumbnails, even for windows hidden behind others</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>App icons and names, active and minimized states</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Close a window or show the desktop without leaving the list</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>On multi-monitor setups the stream follows the window to its screen</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Three-finger swipe: sideways for Alt+Tab, up for the switcher</span></li>
+        </ul>
+      </div>
+      <div class="split-visual reveal" role="img" aria-label="Phone showing the DanceRMD window switcher: a grid of six window previews with app icons, the active window highlighted.">
+        <div class="phone phone--switcher" aria-hidden="true">
+          <div class="phone-screen">
+            <div class="pui">
+              <div class="pui-top"><i class="pui-dot"></i><b>DESKTOP-DANCE</b><span class="pui-batt">82%</span></div>
+              <div class="sheet">
+                <div class="sheet-head">
+                  <b>Open windows</b><span class="count">6</span>
+                  <span class="sheet-btn"><svg><use href="#i-tray"/></svg>Desktop</span>
+                  <svg class="sheet-x"><use href="#i-x"/></svg>
+                </div>
+                <div class="sheet-grid">
+                  <div class="wcard is-active">
+                    <div class="wthumb wthumb--code"><span class="tag tag--accent">Active</span></div>
+                    <div class="winfo"><span class="wapp"><i class="app app--code"></i>Code</span><span class="wtitle">main.py — dancermd</span></div>
+                    <i class="wclose"></i>
+                  </div>
+                  <div class="wcard">
+                    <div class="wthumb wthumb--mail"></div>
+                    <div class="winfo"><span class="wapp"><i class="app app--mail"></i>Mail</span><span class="wtitle">Inbox — 3 unread</span></div>
+                    <i class="wclose"></i>
+                  </div>
+                  <div class="wcard">
+                    <div class="wthumb wthumb--doc"><span class="tag">Screen 2</span></div>
+                    <div class="winfo"><span class="wapp"><i class="app app--word"></i>Word</span><span class="wtitle">Report.docx</span></div>
+                    <i class="wclose"></i>
+                  </div>
+                  <div class="wcard">
+                    <div class="wthumb wthumb--web"></div>
+                    <div class="winfo"><span class="wapp"><i class="app app--web"></i>Browser</span><span class="wtitle">Release notes</span></div>
+                    <i class="wclose"></i>
+                  </div>
+                  <div class="wcard">
+                    <div class="wthumb wthumb--music"><span class="tag">Minimized</span></div>
+                    <div class="winfo"><span class="wapp"><i class="app app--music"></i>Music</span><span class="wtitle">Late night mix</span></div>
+                    <i class="wclose"></i>
+                  </div>
+                  <div class="wcard">
+                    <div class="wthumb wthumb--term"></div>
+                    <div class="winfo"><span class="wapp"><i class="app app--term"></i>Terminal</span><span class="wtitle">pytest -q</span></div>
+                    <i class="wclose"></i>
+                  </div>
+                </div>
+                <p class="sheet-tip">Swipe three fingers sideways to flip back · swipe up to open this list</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== Deep dive: landscape ============================== -->
+  <section class="section section--alt" id="landscape" aria-labelledby="landscape-title">
+    <div class="container split split--reverse">
+      <div class="split-copy reveal">
+        <p class="kicker">Landscape mode</p>
+        <h2 id="landscape-title">Turn your phone sideways for a bigger screen</h2>
+        <p class="section-sub">In landscape the laptop screen takes the full width. Mouse, keyboard and system controls
+          live in a slim rail and slide out as drawers over the picture.</p>
+        <ul class="checks">
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Connection status and battery always in view</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>A dedicated Alt+Tab button on the rail</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Full-screen mode hides everything but the screen</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Pinch to zoom; the view follows the cursor</span></li>
+        </ul>
+      </div>
+      <div class="split-visual reveal" role="img" aria-label="Phone held in landscape: the laptop screen fills the display, a keyboard drawer is open and a slim control rail runs down the right edge.">
+        <div class="phone-land" aria-hidden="true">
+          <div class="phone-screen">
+            <div class="lui">
+              <div class="lui-screen">
+                <div class="desk">
+                  <div class="desk-in">
+                    <div class="desk-win desk-win--code">
+                      <div class="dw-bar"><i class="app app--code"></i><span>main.py — Code</span><i class="dw-ctl"></i></div>
+                      <div class="dw-body dw-code">
+                        <i class="ln" style="--w:46%;--c:var(--syn-kw)"></i>
+                        <i class="ln ln-in" style="--w:62%;--c:var(--syn-fn)"></i>
+                        <i class="ln ln-in2" style="--w:38%;--c:var(--syn-str)"></i>
+                        <i class="ln ln-in2" style="--w:55%;--c:var(--syn-tx)"></i>
+                        <i class="ln ln-in" style="--w:30%;--c:var(--syn-kw)"></i>
+                        <i class="ln" style="--w:0%"></i>
+                        <i class="ln" style="--w:52%;--c:var(--syn-fn)"></i>
+                        <i class="ln ln-in" style="--w:70%;--c:var(--syn-tx)"></i>
+                      </div>
+                    </div>
+                    <div class="desk-win desk-win--mail">
+                      <div class="dw-bar"><i class="app app--mail"></i><span>Inbox — Mail</span><i class="dw-ctl"></i></div>
+                      <div class="dw-body dw-mail"><i class="mrow is-unread"></i><i class="mrow"></i><i class="mrow is-unread"></i><i class="mrow"></i></div>
+                    </div>
+                    <div class="desk-taskbar"><i class="tb-start"></i><i class="app app--code"></i><i class="app app--mail"></i><i class="app app--word"></i><span class="tb-clock">21:34</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="lui-drawer">
+                <div class="lui-drawer-head"><b>Keyboard</b><svg><use href="#i-x"/></svg></div>
+                <div class="lui-type"><span>Hello from the couch</span><b>Enter</b></div>
+                <div class="lui-mods"><span>Ctrl</span><span class="is-on">Alt</span><span>Shift</span><span>Win</span></div>
+                <div class="lui-keys">
+                  <span>Esc</span><span>Tab</span><span>Home</span><span>↑</span><span>End</span><span>⌫</span>
+                  <span>PgUp</span><span>PgDn</span><span>←</span><span>↓</span><span>→</span><span>Del</span>
+                </div>
+              </div>
+              <div class="lui-rail">
+                <span class="lui-status"><i class="pui-dot"></i>82%</span>
+                <span><svg><use href="#i-mouse"/></svg>Mouse</span>
+                <span class="is-on"><svg><use href="#i-keyboard"/></svg>Keys</span>
+                <span><svg><use href="#i-windows"/></svg>Windows</span>
+                <span><svg><use href="#i-laptop"/></svg>System</span>
+                <span><svg><use href="#i-swap"/></svg>Alt+Tab</span>
+                <span class="lui-spacer"></span>
+                <span><svg><use href="#i-expand"/></svg>Full</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== Deep dive: remote access ============================== -->
+  <section class="section" id="remote" aria-labelledby="remote-title">
+    <div class="container split">
+      <div class="split-copy reveal">
+        <p class="kicker">Remote access</p>
+        <h2 id="remote-title">Leave the Wi‑Fi. Keep the control.</h2>
+        <p class="section-sub">Flip one switch and DanceRMD starts a Cloudflare quick tunnel. Your phone gets an HTTPS link
+          that works over 4G or any network — no port forwarding, no router settings, no account.</p>
+        <ul class="checks">
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>HTTPS to Cloudflare, then an encrypted outbound tunnel to your laptop</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>HTTPS enables hardware H.264 decoding in the phone browser</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><code>cloudflared</code> is downloaded once and its digital signature verified</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>A fresh link every time you turn it on; the access token is still required</span></li>
+        </ul>
+      </div>
+      <div class="split-visual reveal" role="img" aria-label="Diagram: the phone on 4G connects over HTTPS to Cloudflare's edge, which reaches the laptop through an outbound tunnel.">
+        <div class="route" aria-hidden="true">
+          <div class="route-node">
+            <span class="route-icon"><svg class="i"><use href="#i-phone"/></svg></span>
+            <span class="route-text"><b>Your phone</b><small>4G · café Wi‑Fi · anywhere</small></span>
+          </div>
+          <div class="route-link"><span class="route-label">HTTPS</span></div>
+          <div class="route-node route-node--cloud">
+            <span class="route-icon"><svg class="i"><use href="#i-cloud"/></svg></span>
+            <span class="route-text"><b>Cloudflare edge</b><small>quick tunnel</small></span>
+          </div>
+          <div class="route-link"><span class="route-label">Outbound tunnel</span></div>
+          <div class="route-node">
+            <span class="route-icon"><svg class="i"><use href="#i-laptop"/></svg></span>
+            <span class="route-text"><b>Your laptop</b><small>DanceRMD + cloudflared</small></span>
+          </div>
+        </div>
+        <div class="url-pill" aria-hidden="true"><svg class="i"><use href="#i-lock"/></svg><span>https://quiet-river-dance.trycloudflare.com</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== Security ============================== -->
+  <section class="section section--alt" id="security" aria-labelledby="security-title">
+    <div class="container">
+      <header class="section-head reveal">
+        <p class="kicker">Security</p>
+        <h2 id="security-title">Private by design</h2>
+        <p class="section-sub">Remote control is powerful, so DanceRMD keeps the door locked and puts you in charge of
+          the key.</p>
+      </header>
+      <ul class="sec-grid">
+        <li class="sec reveal">
+          <svg class="i" aria-hidden="true"><use href="#i-key"/></svg>
+          <div><h3>Access token in the QR code</h3>
+            <p>Every connection must present a random token, checked in constant time. The phone stores it and removes
+              it from the address bar.</p></div>
+        </li>
+        <li class="sec reveal">
+          <svg class="i" aria-hidden="true"><use href="#i-gauge"/></svg>
+          <div><h3>Brute-force protection</h3>
+            <p>Repeated wrong tokens from the same address are blocked for a minute, so guessing is impractical.</p></div>
+        </li>
+        <li class="sec reveal">
+          <svg class="i" aria-hidden="true"><use href="#i-home"/></svg>
+          <div><h3>Dashboard stays on the laptop</h3>
+            <p>The control panel that shows the token only answers local requests. Host and Origin checks stop DNS
+              rebinding, and form-style cross-site requests are rejected.</p></div>
+        </li>
+        <li class="sec reveal">
+          <svg class="i" aria-hidden="true"><use href="#i-refresh"/></svg>
+          <div><h3>Rotate and disconnect</h3>
+            <p>See every connected device, disconnect one, or rotate the token to sign out all phones at once.</p></div>
+        </li>
+        <li class="sec reveal">
+          <svg class="i" aria-hidden="true"><use href="#i-admin"/></svg>
+          <div><h3>Admin rights only when you ask</h3>
+            <p>Windows blocks normal apps from controlling elevated windows such as Task Manager. DanceRMD explains
+              the block, and an optional admin mode lifts it with a single UAC prompt.</p></div>
+        </li>
+        <li class="sec reveal">
+          <svg class="i" aria-hidden="true"><use href="#i-eye-off"/></svg>
+          <div><h3>No accounts, no telemetry</h3>
+            <p>Traffic stays on your local network. It only goes through Cloudflare's encrypted tunnel when you switch
+              remote access on.</p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================== Tech ============================== -->
+  <section class="section" id="tech" aria-labelledby="tech-title">
+    <div class="container tech">
+      <div class="tech-copy reveal">
+        <p class="kicker">Under the hood</p>
+        <h2 id="tech-title">Small, fast and open</h2>
+        <p class="section-sub">A single Python process talks to Windows through the Win32 API and streams to a
+          dependency-free web client over one WebSocket.</p>
+        <ul class="stack" aria-label="Technology stack">
+          <li>Python 3.11</li><li>aiohttp</li><li>PyAV / FFmpeg</li><li>dxcam (DXGI)</li><li>WebCodecs</li>
+          <li>Win32 via ctypes</li><li>pywebview (WebView2)</li><li>pystray</li><li>PyInstaller</li>
+        </ul>
+      </div>
+      <dl class="specs reveal">
+        <div><dt>Capture</dt><dd>DXGI Desktop Duplication, GDI fallback</dd></div>
+        <div><dt>Video</dt><dd>H.264 via NVENC, Quick Sync, AMF or x264 · JPEG fallback</dd></div>
+        <div><dt>Frame rate</dt><dd>Up to 30 fps (H.264) · 20 fps (JPEG)</dd></div>
+        <div><dt>Input</dt><dd>SendInput with full Unicode, per-monitor DPI aware</dd></div>
+        <div><dt>Transport</dt><dd>One WebSocket: binary video frames + JSON commands</dd></div>
+        <div><dt>Remote</dt><dd>Cloudflare quick tunnel (HTTPS)</dd></div>
+        <div><dt>Languages</dt><dd>English, Tiếng Việt</dd></div>
+        <div><dt>Requirements</dt><dd>Windows 10/11 64-bit · any modern phone browser</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============================== FAQ ============================== -->
+  <section class="section section--alt" id="faq" aria-labelledby="faq-title">
+    <div class="container faq-wrap">
+      <header class="section-head reveal">
+        <p class="kicker">FAQ</p>
+        <h2 id="faq-title">Questions, answered</h2>
+      </header>
+      <div class="faq reveal">
+        <details>
+          <summary>Do I need to install an app on my phone?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <p>No. DanceRMD runs in any modern mobile browser — Chrome, Safari, Samsung Internet, Edge or Firefox. You can
+            add it to your home screen for a full-screen, app-like experience.</p>
+        </details>
+        <details>
+          <summary>Does it work when I'm away from home?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <p>Yes. Turn on <strong>Remote access</strong> in the DanceRMD window and scan the new QR code. The link uses a
+            Cloudflare quick tunnel and changes each time you switch it on. If you already use Tailscale, DanceRMD also
+            lists your Tailscale address.</p>
+        </details>
+        <details>
+          <summary>Why do I see JPEG instead of H.264?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <p>Phones decode H.264 through WebCodecs, which browsers only enable on secure (HTTPS) pages. The remote access
+            link is HTTPS, so it gets H.264; a plain local address falls back to JPEG, which still works well on Wi‑Fi.</p>
+        </details>
+        <details>
+          <summary>Why can't I click inside Task Manager?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <p>Windows prevents normal apps from sending input to windows running as administrator (a protection called
+            UIPI). The phone shows a banner when this happens. Enable <strong>Run as administrator</strong> in DanceRMD
+            once — Windows asks for confirmation a single time — and elevated windows work too.</p>
+        </details>
+        <details>
+          <summary>Is it safe to leave running?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <p>Only devices that have your access token can connect, wrong guesses are rate-limited and the dashboard is
+            reachable only from the laptop. If you think someone saw your QR code, rotate the token and every phone is
+            signed out.</p>
+        </details>
+        <details>
+          <summary>Does it support multiple monitors?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <p>Yes. Pick a screen in the settings or tap the screen badge to cycle through them. When you switch to a window
+            on another monitor, the stream follows it automatically.</p>
+        </details>
+        <details>
+          <summary>How much does it cost?<svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+          <p>Nothing. DanceRMD is free and open source under the MIT license. Issues and pull requests are welcome on GitHub.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== Final CTA ============================== -->
+  <section class="final" aria-labelledby="final-title">
+    <div class="container final-inner reveal">
+      <img src="assets/logo-128.png" width="88" height="88" alt="" class="final-logo">
+      <h2 id="final-title">Put your PC <span class="gradient-text">in your pocket.</span></h2>
+      <p class="section-sub">Download DanceRMD, scan the code and you're in control.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="https://github.com/duypham-dev/DanceRMD/releases/latest" data-repo="/releases/latest">
+          <svg class="i" aria-hidden="true"><use href="#i-download"/></svg>Download for Windows
+        </a>
+        <a class="btn btn-outline btn-lg" href="https://github.com/duypham-dev/DanceRMD" data-repo="">
+          <svg class="i" aria-hidden="true"><use href="#i-github"/></svg>Star on GitHub
+        </a>
+      </div>
+      <p class="cta-note">Windows 10/11, 64-bit · Free and open source</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="#top" aria-label="DanceRMD, back to top">
+        <img src="assets/logo-64.png" width="32" height="32" alt="">
+        <span>Dance<b>RMD</b></span>
+      </a>
+      <p>Control your Windows PC from any phone browser.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <div>
+        <h2>Product</h2>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Project</h2>
+        <ul>
+          <li><a href="https://github.com/duypham-dev/DanceRMD" data-repo="">Source code</a></li>
+          <li><a href="https://github.com/duypham-dev/DanceRMD/releases" data-repo="/releases">Releases</a></li>
+          <li><a href="https://github.com/duypham-dev/DanceRMD/issues" data-repo="/issues">Report an issue</a></li>
+          <li><a href="https://github.com/duypham-dev/DanceRMD/blob/main/LICENSE" data-repo="/blob/main/LICENSE">MIT License</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="container footer-bottom">
+    <p>© <span data-year>2026</span> DanceRMD · Made by Phạm Phúc Duy · MIT License</p>
+    <p>Windows is a trademark of Microsoft. Cloudflare is a trademark of Cloudflare, Inc. DanceRMD is not affiliated with either.</p>
+  </div>
+</footer>
+</body>
+</html>
