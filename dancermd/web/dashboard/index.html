@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DanceRMD</title>
+<link rel="icon" href="/icons/app-icon.png" type="image/png">
+<link rel="stylesheet" href="/static/dashboard/dashboard.css">
+</head>
+<body>
+<main class="wrap">
+  <header class="head">
+    <img src="/icons/app-icon.png" alt="">
+    <div class="head-text">
+      <h1>DanceRMD</h1>
+      <p class="muted" id="sub"></p>
+    </div>
+    <span class="badge" id="status"><span class="dot"></span><span id="status-text" data-i18n="dash.status.starting">Starting…</span></span>
+  </header>
+
+  <div class="grid">
+    <section class="card qr-card" aria-labelledby="qr-title">
+      <h2 id="qr-title" data-i18n="dash.scan">Scan to connect</h2>
+      <div class="qr" id="qr" role="img" data-i18n-attr="aria-label:dash.qr"></div>
+      <label class="field-label" for="addr" data-i18n="dash.address">Address</label>
+      <select id="addr"></select>
+      <p class="url" id="url"></p>
+      <p class="muted small" id="addr-hint"></p>
+      <button type="button" class="btn" id="copy-link" data-i18n="dash.copy_link">Copy link</button>
+    </section>
+
+    <div class="stack">
+      <section class="card" aria-labelledby="dev-title">
+        <div class="card-head">
+          <h2 id="dev-title" data-i18n="dash.devices">Connected phones</h2>
+          <span class="count" id="dev-count">0</span>
+        </div>
+        <ul class="devices" id="devices"></ul>
+        <p class="empty" id="dev-empty" data-i18n="dash.no_devices"></p>
+      </section>
+
+      <section class="card" aria-labelledby="remote-title">
+        <div class="card-head">
+          <h2 id="remote-title" data-i18n="dash.remote">Remote access</h2>
+          <label class="switch"><input type="checkbox" id="tunnel" data-i18n-attr="aria-label:dash.remote_toggle"><span></span></label>
+        </div>
+        <p class="muted small" data-i18n-html="dash.remote_desc"></p>
+        <p class="tunnel-status" id="tunnel-status" hidden><span class="dot"></span><span id="tunnel-text"></span></p>
+      </section>
+
+      <section class="card" aria-labelledby="token-title">
+        <h2 id="token-title" data-i18n="dash.token">Access code</h2>
+        <div class="token-row">
+          <code id="token">••••••••••••••••</code>
+          <button type="button" class="btn" id="reveal" aria-pressed="false" data-i18n="dash.show">Show</button>
+          <button type="button" class="btn danger" id="rotate" data-i18n="dash.rotate">Change code</button>
+        </div>
+        <p class="muted small" data-i18n="dash.token_desc"></p>
+      </section>
+
+      <section class="card" aria-labelledby="opt-title">
+        <h2 id="opt-title" data-i18n="dash.options">Options</h2>
+        <div class="opt">
+          <div>
+            <b data-i18n="dash.autostart">Start with Windows</b>
+            <p class="muted small" data-i18n="dash.autostart_desc"></p>
+          </div>
+          <label class="switch"><input type="checkbox" id="autostart" data-i18n-attr="aria-label:dash.autostart"><span></span></label>
+        </div>
+        <div class="opt" id="admin-row" hidden>
+          <div>
+            <b data-i18n="dash.admin">Run as administrator</b>
+            <p class="muted small" id="admin-desc"></p>
+          </div>
+          <label class="switch"><input type="checkbox" id="admin" data-i18n-attr="aria-label:dash.admin"><span></span></label>
+        </div>
+        <div class="opt" id="install-row" hidden>
+          <div>
+            <b data-i18n="dash.install">Install on this PC</b>
+            <p class="muted small" id="install-desc"></p>
+          </div>
+          <button type="button" class="btn" id="install" data-i18n="dash.install_btn">Install</button>
+        </div>
+        <div class="opt">
+          <div>
+            <b data-i18n="dash.firewall">Open the firewall port</b>
+            <p class="muted small" data-i18n="dash.firewall_desc"></p>
+          </div>
+          <button type="button" class="btn" id="firewall" data-i18n="dash.firewall_btn">Open port</button>
+        </div>
+        <div class="opt">
+          <div>
+            <label for="language"><b data-i18n="dash.language">Language</b></label>
+            <p class="muted small" data-i18n="dash.language_desc"></p>
+          </div>
+          <select id="language">
+            <option value="auto" data-i18n="lang.auto">Automatic</option>
+            <option value="en">English</option>
+            <option value="vi">Tiếng Việt</option>
+          </select>
+        </div>
+      </section>
+
+      <details class="card help">
+        <summary data-i18n="dash.help">Phone can’t connect?</summary>
+        <ol>
+          <li data-i18n="dash.help1"></li>
+          <li data-i18n-html="dash.help2"></li>
+          <li data-i18n-html="dash.help3"></li>
+        </ol>
+      </details>
+    </div>
+  </div>
+  <footer class="muted small" id="footer"></footer>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="/static/shared/i18n.js"></script>
+<script src="/static/shared/locales/en.js"></script>
+<script src="/static/shared/locales/vi.js"></script>
+<script src="/static/dashboard/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "DanceRMD",
+  "short_name": "DanceRMD",
+  "description": "Control your Windows PC from this phone",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0907",
+  "theme_color": "#0c0907",
+  "icons": [
+    { "src": "/icons/app-icon.png", "sizes": "256x256", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

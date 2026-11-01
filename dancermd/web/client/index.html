@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0c0907">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DanceRMD">
+<title>DanceRMD</title>
+<link rel="manifest" href="/static/client/manifest.webmanifest">
+<link rel="icon" href="/icons/app-icon.png" type="image/png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="stylesheet" href="/static/client/style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></symbol>
+  <symbol id="i-shrink" viewBox="0 0 24 24"><path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5"/></symbol>
+  <symbol id="i-mouse" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="6"/><path d="M12 7v4"/></symbol>
+  <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M18 6l-8 6 8 6V6z"/><path d="M6 6v12"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M6 6l8 6-8 6V6z"/><path d="M18 6v12"/></symbol>
+  <symbol id="i-playpause" viewBox="0 0 24 24"><path d="M4 6l8 6-8 6V6z"/><path d="M16 6v12M20 6v12"/></symbol>
+  <symbol id="i-vol-mute" viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3z"/><path d="M16 9l5 6M21 9l-5 6"/></symbol>
+  <symbol id="i-vol-down" viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3z"/><path d="M16 12h5"/></symbol>
+  <symbol id="i-vol-up" viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3z"/><path d="M16 12h5M18.5 9.5v5"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-monitor-off" viewBox="0 0 24 24"><path d="M8 4h11a2 2 0 0 1 2 2v9a2 2 0 0 1-1 1.7M16 17H5a2 2 0 0 1-2-2V6a2 2 0 0 1 1-1.7M8 21h8M12 17v4M3 3l18 18"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="i-snow" viewBox="0 0 24 24"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9.5 4.5L12 7l2.5-2.5M9.5 19.5L12 17l2.5 2.5"/></symbol>
+  <symbol id="i-restart" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></symbol>
+  <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M6.3 6.3a8 8 0 1 0 11.4 0"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 15V4M7 9l5-5 5 5M5 20h14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></symbol>
+  <symbol id="i-windows" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h15M15 4l4 4-4 4M20 16H5M9 12l-4 4 4 4"/></symbol>
+  <symbol id="i-desktop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></symbol>
+  <symbol id="i-screens" viewBox="0 0 24 24"><rect x="2" y="4" width="13" height="10" rx="1.5"/><path d="M18 8h2.5a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9a1.5 1.5 0 0 1-1.5-1.5V17"/></symbol>
+</svg>
+
+<div id="app">
+  <header class="topbar">
+    <span class="status connecting" id="status"></span>
+    <span class="host" id="host">Connecting…</span>
+    <span class="battery" id="battery" hidden>
+      <svg class="i i-sm" id="battery-bolt"><use href="#i-bolt"/></svg><span id="battery-text"></span>
+    </span>
+    <button type="button" class="icon-btn" id="btn-full" data-i18n-attr="aria-label:action.fullscreen"><svg class="i"><use href="#i-expand"/></svg></button>
+    <button type="button" class="icon-btn" id="btn-settings" data-i18n-attr="aria-label:action.settings"><svg class="i"><use href="#i-sliders"/></svg></button>
+  </header>
+
+  <main class="surface" id="surface">
+    <canvas id="screen"></canvas>
+    <div class="surface-hint" id="hint">
+      <svg class="i"><use href="#i-mouse"/></svg>
+      <p class="title" id="hint-title">Connecting…</p>
+      <p class="small" data-i18n="hint.gestures">Drag one finger to move the pointer · tap to click · use two fingers to scroll</p>
+    </div>
+    <div class="surface-ui">
+      <button type="button" class="pill" id="zoom-badge" hidden></button>
+      <button type="button" class="pill" id="mon-badge" hidden><svg class="i i-sm"><use href="#i-screens"/></svg><span></span></button>
+      <button type="button" class="icon-btn pill-round" id="btn-exit-full" data-i18n-attr="aria-label:action.exit_fullscreen"><svg class="i"><use href="#i-shrink"/></svg></button>
+      <button type="button" class="icon-btn pill-round" id="btn-windows-float" data-i18n-attr="aria-label:switcher.title"><svg class="i"><use href="#i-windows"/></svg></button>
+      <div class="uipi-banner" id="uipi" role="status" hidden>
+        <svg class="i"><use href="#i-lock"/></svg>
+        <p><span id="uipi-text"></span> <span id="uipi-hint"></span></p>
+      </div>
+    </div>
+  </main>
+
+  <section class="dock" id="dock" aria-labelledby="dock-title">
+    <!-- Drawer header, only shown in landscape -->
+    <div class="dock-head landscape-only">
+      <h2 id="dock-title">Mouse</h2>
+      <button type="button" class="icon-btn" id="dock-close" data-i18n-attr="aria-label:dock.collapse"><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+
+    <!-- Mouse -->
+    <div class="panel" data-panel="mouse">
+      <div class="win-strip" id="win-strip" role="group" data-i18n-attr="aria-label:mouse.strip">
+        <button type="button" class="win-chip win-chip-all" id="win-all"><svg class="i"><use href="#i-windows"/></svg><span class="t" data-i18n="mouse.all">All</span></button>
+      </div>
+      <div class="mouse-row">
+        <button type="button" class="mbtn" data-mouse="left" data-i18n="mouse.left">Left click</button>
+        <button type="button" class="mbtn" data-mouse="right" data-i18n="mouse.right">Right click</button>
+      </div>
+      <div class="seg" id="mode-seg" role="radiogroup" data-i18n-attr="aria-label:mouse.mode">
+        <button type="button" data-value="touchpad" data-i18n="mouse.touchpad">Touchpad</button>
+        <button type="button" data-value="direct" data-i18n="mouse.direct">Direct touch</button>
+      </div>
+    </div>
+
+    <!-- Keyboard -->
+    <div class="panel" data-panel="keys" hidden>
+      <div class="type-box">
+        <textarea id="type-input" rows="1" autocapitalize="off" autocomplete="off" spellcheck="false"
+                  data-i18n-attr="aria-label:keys.input"></textarea>
+        <button type="button" class="btn primary" id="type-send">Enter</button>
+      </div>
+      <div class="type-meta">
+        <label class="switch"><input type="checkbox" id="live"><span></span><b data-i18n="keys.live">Live typing</b></label>
+        <span class="muted small" id="type-help"></span>
+      </div>
+      <div class="mods">
+        <button type="button" class="key mod" data-mod="ctrl" aria-pressed="false">Ctrl</button>
+        <button type="button" class="key mod" data-mod="alt" aria-pressed="false">Alt</button>
+        <button type="button" class="key mod" data-mod="shift" aria-pressed="false">Shift</button>
+        <button type="button" class="key mod" data-mod="win" aria-pressed="false">Win</button>
+      </div>
+      <div class="keys-grid">
+        <button type="button" class="key" data-key="esc">Esc</button>
+        <button type="button" class="key" data-key="tab">Tab</button>
+        <button type="button" class="key" data-key="home">Home</button>
+        <button type="button" class="key" data-key="up" data-repeat data-i18n-attr="aria-label:keys.up">↑</button>
+        <button type="button" class="key" data-key="end">End</button>
+        <button type="button" class="key" data-key="backspace" data-repeat data-i18n-attr="aria-label:keys.backspace">⌫</button>
+        <button type="button" class="key" data-key="pageup">PgUp</button>
+        <button type="button" class="key" data-key="pagedown">PgDn</button>
+        <button type="button" class="key" data-key="left" data-repeat data-i18n-attr="aria-label:keys.left">←</button>
+        <button type="button" class="key" data-key="down" data-repeat data-i18n-attr="aria-label:keys.down">↓</button>
+        <button type="button" class="key" data-key="right" data-repeat data-i18n-attr="aria-label:keys.right">→</button>
+        <button type="button" class="key" data-key="delete" data-repeat>Del</button>
+        <button type="button" class="key span-4" data-key="space">Space</button>
+        <button type="button" class="key span-2" data-key="enter">Enter</button>
+      </div>
+      <div class="fkeys" role="group" data-i18n-attr="aria-label:keys.function">
+        <button type="button" class="key" data-key="f1">F1</button><button type="button" class="key" data-key="f2">F2</button>
+        <button type="button" class="key" data-key="f3">F3</button><button type="button" class="key" data-key="f4">F4</button>
+        <button type="button" class="key" data-key="f5">F5</button><button type="button" class="key" data-key="f6">F6</button>
+        <button type="button" class="key" data-key="f7">F7</button><button type="button" class="key" data-key="f8">F8</button>
+        <button type="button" class="key" data-key="f9">F9</button><button type="button" class="key" data-key="f10">F10</button>
+        <button type="button" class="key" data-key="f11">F11</button><button type="button" class="key" data-key="f12">F12</button>
+      </div>
+      <div class="chips" role="group" data-i18n-attr="aria-label:keys.shortcuts">
+        <button type="button" class="chip" data-combo="ctrl+c"><span data-i18n="sc.copy">Copy</span><kbd>Ctrl C</kbd></button>
+        <button type="button" class="chip" data-combo="ctrl+v"><span data-i18n="sc.paste">Paste</span><kbd>Ctrl V</kbd></button>
+        <button type="button" class="chip" data-combo="ctrl+x"><span data-i18n="sc.cut">Cut</span><kbd>Ctrl X</kbd></button>
+        <button type="button" class="chip" data-combo="ctrl+z" data-repeat><span data-i18n="sc.undo">Undo</span><kbd>Ctrl Z</kbd></button>
+        <button type="button" class="chip" data-combo="ctrl+y"><span data-i18n="sc.redo">Redo</span><kbd>Ctrl Y</kbd></button>
+        <button type="button" class="chip" data-combo="ctrl+a"><span data-i18n="sc.select_all">Select all</span><kbd>Ctrl A</kbd></button>
+        <button type="button" class="chip" data-combo="ctrl+s"><span data-i18n="sc.save">Save</span><kbd>Ctrl S</kbd></button>
+        <button type="button" class="chip" data-combo="ctrl+f"><span data-i18n="sc.find">Find</span><kbd>Ctrl F</kbd></button>
+        <button type="button" class="chip" data-combo="alt+tab"><span data-i18n="sc.switch_window">Switch window</span><kbd>Alt Tab</kbd></button>
+        <button type="button" class="chip" data-combo="win+tab"><span data-i18n="sc.task_view">Task view</span><kbd>Win Tab</kbd></button>
+        <button type="button" class="chip" data-combo="alt+f4"><span data-i18n="sc.close_window">Close window</span><kbd>Alt F4</kbd></button>
+        <button type="button" class="chip" data-combo="win+d"><span data-i18n="sc.desktop">Desktop</span><kbd>Win D</kbd></button>
+        <button type="button" class="chip" data-combo="win"><span data-i18n="sc.start">Start</span><kbd>Win</kbd></button>
+        <button type="button" class="chip" data-combo="win+e"><span data-i18n="sc.explorer">File Explorer</span><kbd>Win E</kbd></button>
+        <button type="button" class="chip" data-combo="ctrl+t"><span data-i18n="sc.new_tab">New tab</span><kbd>Ctrl T</kbd></button>
+        <button type="button" class="chip" data-combo="ctrl+w"><span data-i18n="sc.close_tab">Close tab</span><kbd>Ctrl W</kbd></button>
+        <button type="button" class="chip" data-combo="ctrl+shift+t"><span data-i18n="sc.reopen_tab">Reopen tab</span><kbd>Ctrl ⇧ T</kbd></button>
+        <button type="button" class="chip" data-combo="ctrl+tab"><span data-i18n="sc.next_tab">Next tab</span><kbd>Ctrl Tab</kbd></button>
+        <button type="button" class="chip" data-combo="f5"><span data-i18n="sc.reload">Reload</span><kbd>F5</kbd></button>
+        <button type="button" class="chip" data-combo="f11"><span data-i18n="sc.fullscreen">Full screen</span><kbd>F11</kbd></button>
+        <button type="button" class="chip" data-combo="win+shift+s"><span data-i18n="sc.snip">Snip</span><kbd>Win ⇧ S</kbd></button>
+        <button type="button" class="chip" data-combo="ctrl+shift+esc"><span data-i18n="sc.task_manager">Task Manager</span><kbd>Ctrl ⇧ Esc</kbd></button>
+      </div>
+    </div>
+
+    <!-- System -->
+    <div class="panel" data-panel="system" hidden>
+      <section class="group">
+        <h3 data-i18n="system.media">Media &amp; volume</h3>
+        <div class="row-btns">
+          <button type="button" class="tile" data-combo="media_prev" data-i18n-attr="aria-label:system.prev_track"><svg class="i"><use href="#i-prev"/></svg></button>
+          <button type="button" class="tile" data-combo="media_play_pause" data-i18n-attr="aria-label:system.play_pause"><svg class="i"><use href="#i-playpause"/></svg></button>
+          <button type="button" class="tile" data-combo="media_next" data-i18n-attr="aria-label:system.next_track"><svg class="i"><use href="#i-next"/></svg></button>
+          <button type="button" class="tile" data-combo="volume_mute" data-i18n-attr="aria-label:system.mute"><svg class="i"><use href="#i-vol-mute"/></svg></button>
+          <button type="button" class="tile" data-combo="volume_down" data-repeat data-i18n-attr="aria-label:system.volume_down"><svg class="i"><use href="#i-vol-down"/></svg></button>
+          <button type="button" class="tile" data-combo="volume_up" data-repeat data-i18n-attr="aria-label:system.volume_up"><svg class="i"><use href="#i-vol-up"/></svg></button>
+        </div>
+      </section>
+
+      <section class="group">
+        <h3><label for="bright" data-i18n="system.brightness">Display brightness</label><span id="bright-val"></span></h3>
+        <input type="range" id="bright" min="0" max="100" step="5" value="50">
+        <p class="muted small" id="bright-note" data-i18n="system.brightness_unsupported" hidden></p>
+      </section>
+
+      <section class="group">
+        <h3 data-i18n="system.clipboard">Clipboard</h3>
+        <textarea id="clip-text" rows="3" data-i18n-attr="placeholder:system.clipboard_placeholder; aria-label:system.clipboard_text"></textarea>
+        <div class="row-btns two">
+          <button type="button" class="btn" id="clip-get"><svg class="i"><use href="#i-download"/></svg><span data-i18n="system.clipboard_get">Get from PC</span></button>
+          <button type="button" class="btn" id="clip-set"><svg class="i"><use href="#i-upload"/></svg><span data-i18n="system.clipboard_set">Send to PC</span></button>
+        </div>
+      </section>
+
+      <section class="group">
+        <h3><label for="url-input" data-i18n="system.open_link">Open a link on the PC</label></h3>
+        <form class="inline-form" id="url-form">
+          <input type="url" id="url-input" placeholder="https://…" inputmode="url" autocapitalize="off" autocomplete="off">
+          <button class="btn primary" data-i18n="system.open">Open</button>
+        </form>
+      </section>
+
+      <section class="group">
+        <h3 data-i18n="system.power">Power</h3>
+        <div class="power-grid">
+          <button type="button" class="tile" data-power="lock"><svg class="i"><use href="#i-lock"/></svg><span data-i18n="power.lock_btn">Lock</span></button>
+          <button type="button" class="tile" data-power="display_off"><svg class="i"><use href="#i-monitor-off"/></svg><span data-i18n="power.display_off_btn">Screen off</span></button>
+          <button type="button" class="tile" data-power="sleep"><svg class="i"><use href="#i-moon"/></svg><span data-i18n="power.sleep_btn">Sleep</span></button>
+          <button type="button" class="tile" data-power="hibernate"><svg class="i"><use href="#i-snow"/></svg><span data-i18n="power.hibernate_btn">Hibernate</span></button>
+          <button type="button" class="tile" data-power="restart"><svg class="i"><use href="#i-restart"/></svg><span data-i18n="power.restart_btn">Restart</span></button>
+          <button type="button" class="tile danger" data-power="shutdown"><svg class="i"><use href="#i-power"/></svg><span data-i18n="power.shutdown_btn">Shut down</span></button>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- Portrait: bottom tab bar. Landscape: vertical rail on the right with status and quick actions. -->
+  <nav class="tabbar" data-i18n-attr="aria-label:nav.controls">
+    <div class="rail-status landscape-only" aria-hidden="true">
+      <span class="status connecting" id="status-rail"></span>
+      <span id="battery-rail"></span>
+    </div>
+    <button type="button" data-tab="mouse" aria-pressed="true"><svg class="i"><use href="#i-mouse"/></svg><span data-i18n="tab.mouse">Mouse</span></button>
+    <button type="button" data-tab="keys" aria-pressed="false"><svg class="i"><use href="#i-keyboard"/></svg><span data-i18n="tab.keys">Keyboard</span></button>
+    <button type="button" id="tab-windows" aria-haspopup="dialog" aria-expanded="false"><svg class="i"><use href="#i-windows"/></svg><span data-i18n="tab.windows">Windows</span></button>
+    <button type="button" data-tab="system" aria-pressed="false"><svg class="i"><use href="#i-laptop"/></svg><span data-i18n="tab.system">System</span></button>
+    <button type="button" class="landscape-only" id="rail-prev" data-i18n-attr="aria-label:tab.alt_tab_label"><svg class="i"><use href="#i-swap"/></svg><span data-i18n="tab.alt_tab">Alt+Tab</span></button>
+    <span class="rail-spacer landscape-only"></span>
+    <button type="button" class="landscape-only" id="rail-full" data-i18n-attr="aria-label:action.fullscreen"><svg class="i"><use href="#i-expand"/></svg><span data-i18n="tab.full">Full</span></button>
+    <button type="button" class="landscape-only" id="rail-settings" data-i18n-attr="aria-label:action.settings"><svg class="i"><use href="#i-sliders"/></svg><span data-i18n="action.settings">Settings</span></button>
+  </nav>
+</div>
+
+<!-- Settings -->
+<div class="backdrop" id="settings" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="sheet-head">
+      <h2 id="settings-title" data-i18n="settings.title">Settings</h2>
+      <button type="button" class="icon-btn" data-close data-i18n-attr="aria-label:action.close"><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="field">
+      <label class="switch"><input type="checkbox" id="opt-stream"><span></span><b data-i18n="settings.stream">Stream the screen</b></label>
+      <p class="muted small" data-i18n="settings.stream_help"></p>
+    </div>
+    <div class="field">
+      <span class="label" id="quality-label" data-i18n="settings.quality">Image quality</span>
+      <div class="seg" id="opt-quality" role="radiogroup" aria-labelledby="quality-label">
+        <button type="button" data-value="low" data-i18n="quality.low">Low</button>
+        <button type="button" data-value="medium" data-i18n="quality.medium">Medium</button>
+        <button type="button" data-value="high" data-i18n="quality.high">High</button>
+      </div>
+      <p class="muted small" data-i18n="settings.quality_help"></p>
+    </div>
+    <div class="field">
+      <span class="label" id="codec-label" data-i18n="settings.format">Video format</span>
+      <div class="seg" id="opt-codec" role="radiogroup" aria-labelledby="codec-label">
+        <button type="button" data-value="auto" data-i18n="settings.format_auto">Auto (H.264)</button>
+        <button type="button" data-value="jpeg">JPEG</button>
+      </div>
+      <p class="muted small" id="codec-info"></p>
+    </div>
+    <div class="field" id="monitor-field">
+      <label class="label" for="opt-monitor" data-i18n="settings.monitor">Display</label>
+      <select id="opt-monitor"></select>
+    </div>
+    <div class="field">
+      <label class="label" for="opt-speed"><span data-i18n="settings.speed">Pointer speed</span> <span class="muted" id="speed-val"></span></label>
+      <input type="range" id="opt-speed" min="0.5" max="4" step="0.1">
+    </div>
+    <div class="field">
+      <label class="label" for="opt-lang" data-i18n="settings.language">Language</label>
+      <select id="opt-lang">
+        <option value="auto" data-i18n="lang.auto">Automatic</option>
+        <option value="en">English</option>
+        <option value="vi">Tiếng Việt</option>
+      </select>
+    </div>
+    <div class="field help">
+      <span class="label" data-i18n="settings.gestures">Gestures</span>
+      <dl>
+        <dt data-i18n="gesture.tap"></dt><dd data-i18n="gesture.tap_desc"></dd>
+        <dt data-i18n="gesture.two_tap"></dt><dd data-i18n="gesture.two_tap_desc"></dd>
+        <dt data-i18n="gesture.two_drag"></dt><dd data-i18n="gesture.two_drag_desc"></dd>
+        <dt data-i18n="gesture.pinch"></dt><dd data-i18n="gesture.pinch_desc"></dd>
+        <dt data-i18n="gesture.hold"></dt><dd data-i18n="gesture.hold_desc"></dd>
+        <dt data-i18n="gesture.touchpad"></dt><dd data-i18n="gesture.touchpad_desc"></dd>
+        <dt data-i18n="gesture.direct"></dt><dd data-i18n="gesture.direct_desc"></dd>
+        <dt data-i18n="gesture.three_side"></dt><dd data-i18n="gesture.three_side_desc"></dd>
+        <dt data-i18n="gesture.three_up"></dt><dd data-i18n="gesture.three_up_desc"></dd>
+      </dl>
+    </div>
+    <div class="field">
+      <p class="muted small" id="conn-info"></p>
+      <button type="button" class="btn outline-danger" id="logout" data-i18n="settings.forget">Forget the access code on this phone</button>
+    </div>
+  </div>
+</div>
+
+<!-- Window switcher (like Alt+Tab) -->
+<div class="switcher" id="switcher" hidden>
+  <div class="switcher-panel" role="dialog" aria-modal="true" aria-labelledby="switcher-title">
+    <div class="switcher-head">
+      <h2 id="switcher-title"><span data-i18n="switcher.title">Open windows</span> <span class="count" id="win-count"></span></h2>
+      <button type="button" class="btn btn-sm" id="win-desktop"><svg class="i"><use href="#i-desktop"/></svg><span data-i18n="switcher.desktop">Desktop</span></button>
+      <button type="button" class="icon-btn" data-close data-i18n-attr="aria-label:switcher.close"><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="win-grid" id="win-grid" role="list" data-i18n-attr="aria-label:switcher.list"></div>
+    <div class="win-empty" id="win-empty" hidden>
+      <svg class="i"><use href="#i-windows"/></svg>
+      <p data-i18n="switcher.empty">No windows are open.</p>
+    </div>
+    <p class="switcher-tip" data-i18n="switcher.tip"></p>
+  </div>
+</div>
+
+<!-- Sign-in -->
+<div class="overlay solid" id="login" hidden>
+  <form class="card" id="login-form">
+    <img class="brand-mark" src="/icons/app-icon.png" alt="" width="56" height="56">
+    <h1 data-i18n="login.title">Connect to your PC</h1>
+    <p data-i18n="login.text"></p>
+    <input type="text" id="login-token" autocomplete="off" autocapitalize="off" spellcheck="false"
+           data-i18n-attr="placeholder:login.placeholder; aria-label:login.placeholder">
+    <p class="error" id="login-error" role="alert"></p>
+    <button class="btn primary" data-i18n="login.connect">Connect</button>
+  </form>
+</div>
+
+<!-- Disconnected by the PC -->
+<div class="overlay solid" id="kicked" hidden>
+  <div class="card">
+    <h1 data-i18n="kicked.title">Disconnected</h1>
+    <p data-i18n="kicked.text"></p>
+    <button type="button" class="btn primary" id="reconnect" data-i18n="kicked.reconnect">Reconnect</button>
+  </div>
+</div>
+
+<!-- Confirmation -->
+<div class="overlay" id="confirm" hidden>
+  <div class="dialog" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title" aria-describedby="confirm-text">
+    <h2 id="confirm-title"></h2>
+    <p id="confirm-text"></p>
+    <div class="dialog-actions">
+      <button type="button" class="btn" data-answer="no" data-i18n="action.cancel">Cancel</button>
+      <button type="button" class="btn primary" data-answer="yes" id="confirm-ok"></button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="/static/shared/i18n.js"></script>
+<script src="/static/shared/locales/en.js"></script>
+<script src="/static/shared/locales/vi.js"></script>
+<script src="/static/client/app.js"></script>
+</body>
+</html>
