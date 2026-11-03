@@ -4,6 +4,18 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- Theme setting for the desktop app: dark (default), light, or follow Windows.
+
+### Changed
+- Redesigned desktop app window: a sidebar with a **Connect** page (QR code, connected phones, remote
+  access, troubleshooting) and a **Settings** page (general, permissions, security, network,
+  technical details). Choose "Same Wi-Fi" or "Over the Internet" with a toggle instead of an
+  address list, and confirm a new access code in an in-app dialog.
+- The desktop app starts in English. "Same as Windows" is still available in Settings > Language.
+
 ## [2.0.0] - 2026-11-01
 
 The project is renamed from **Remote Laptop** to **DanceRMD**.

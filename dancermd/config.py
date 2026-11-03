@@ -1,7 +1,7 @@
 """User settings (config.json in the data directory) and logging setup.
 
-Keys: token, paired, port, language ("auto" | "en" | "vi"), tunnel, autostart, run_as_admin,
-install_declined, show_on_start.
+Keys: token, paired, port, language ("auto" | "en" | "vi"), theme ("dark" | "light" | "system"), tunnel,
+autostart, run_as_admin, install_declined, show_on_start.
 """
 
 import json
@@ -15,6 +15,15 @@ from . import paths
 
 log = logging.getLogger("dancermd")
 DEFAULT_PORT = 8765
+DEFAULT_LANGUAGE = "en"  # "auto" follows the Windows display language
+THEMES = ("dark", "light", "system")
+DEFAULT_THEME = "dark"
+
+
+def theme(cfg):
+    """The dashboard theme setting, falling back to the default for unknown values."""
+    value = cfg.get("theme")
+    return value if value in THEMES else DEFAULT_THEME
 
 
 def new_token():

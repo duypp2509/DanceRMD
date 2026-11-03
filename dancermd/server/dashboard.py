@@ -45,7 +45,8 @@ def dashboard_state(state):
     return {
         "app": APP_NAME, "version": VERSION, "mode": state.mode, "port": port, "token": cfg["token"],
         "host": socket.gethostname(), "data_dir": str(paths.DATA_DIR), "links": links,
-        "language": i18n.resolve(cfg.get("language", "auto")), "language_setting": cfg.get("language", "auto"),
+        "language": i18n.resolve(cfg.get("language", config.DEFAULT_LANGUAGE)),
+        "language_setting": cfg.get("language", config.DEFAULT_LANGUAGE), "theme": config.theme(cfg),
         "devices": sorted((s.info() for s in state.sessions.values()), key=lambda d: d["since"]),
         "autostart": state.hooks.autostart_enabled(), "tunnel": tunnel, "tunnel_enabled": bool(cfg.get("tunnel")),
         "admin": {"available": state.hooks.set_admin_mode is not None, "enabled": bool(cfg.get("run_as_admin")),
@@ -136,6 +137,17 @@ async def set_language(request):
 
 
 @local_only
+async def set_theme(request):
+    state = request.app[STATE]
+    theme = (await request.json()).get("theme")
+    if theme not in config.THEMES:
+        return _failed(UserError("feature.unavailable", "Unsupported theme"))
+    state.config["theme"] = theme
+    config.save(state.config)
+    return _ok(request)
+
+
+@local_only
 async def open_firewall(request):
     try:
         await asyncio.to_thread(run_elevated_script, paths.FIREWALL_SCRIPT, "-Port", str(request.app[STATE].port))
@@ -182,6 +194,7 @@ def add_routes(app):
     app.router.add_get("/pair", legacy_page)
     app.router.add_get("/api/state", get_state)
     for path, handler in (("token", rotate_token), ("kick", kick), ("autostart", set_autostart),
-                          ("admin", set_admin), ("language", set_language), ("firewall", open_firewall),
+                          ("admin", set_admin), ("language", set_language), ("theme", set_theme),
+                          ("firewall", open_firewall),
                           ("tunnel", set_tunnel), ("show", show), ("install", install), ("quit", quit_app)):
         app.router.add_post(f"/api/{path}", handler)

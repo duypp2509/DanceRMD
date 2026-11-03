@@ -121,7 +121,8 @@ headers. `POST` requests must be same-origin with `Content-Type: application/jso
 | `POST /api/tunnel` | `{"enabled": bool}` | Start or stop remote access (remembered) |
 | `POST /api/autostart` | `{"enabled": bool}` | Start with Windows |
 | `POST /api/admin` | `{"enabled": bool}` | Admin mode; the app restarts (desktop only) |
-| `POST /api/language` | `{"language": "auto" \| "en" \| "vi"}` | Dashboard and tray language |
+| `POST /api/language` | `{"language": "auto" \| "en" \| "vi"}` | Dashboard and tray language (`"en"` by default) |
+| `POST /api/theme` | `{"theme": "dark" \| "light" \| "system"}` | Dashboard theme (`"dark"` by default) |
 | `POST /api/firewall` | `{}` | Run the firewall script elevated |
 | `POST /api/install` | `{}` | Install the running executable (packaged build only) |
 | `POST /api/show` | `{}` | Bring the window to the front (used by a second launch) |

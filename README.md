@@ -50,8 +50,8 @@
 | **Landscape layout** | The PC screen takes the full width; controls live in a slim side rail with slide-out drawers. |
 | **System controls** | Media keys, volume, brightness, two-way clipboard, open a link on the PC, lock / sleep / hibernate / restart / shut down with confirmations, battery status. |
 | **Remote access** | One switch starts a Cloudflare quick tunnel: HTTPS from anywhere, no port forwarding, no account. |
-| **Desktop app** | Dashboard window with the QR code and connected phones, tray icon with connection notifications, per-user install (no admin rights), start with Windows, optional admin mode. |
-| **English and Vietnamese** | Both the phone UI and the desktop app; automatic or chosen in the settings. |
+| **Desktop app** | A Connect page with the QR code and connected phones, a Settings page with a dark or light theme, tray icon with connection notifications, per-user install (no admin rights), start with Windows, optional admin mode. |
+| **English and Vietnamese** | Both the phone UI and the desktop app. The phone follows its browser language; the desktop app starts in English. Either can be changed in its settings. |
 
 ## Getting started
 

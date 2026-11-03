@@ -1,119 +1,368 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DanceRMD</title>
 <link rel="icon" href="/icons/app-icon.png" type="image/png">
+<script>
+  /* Apply the last theme before the first paint; dashboard.js keeps it in sync with the settings */
+  (() => {
+    let setting = 'dark';
+    try { setting = localStorage.getItem('dancermd.theme') || 'dark'; } catch { /* storage blocked */ }
+    const dark = setting === 'system' ? matchMedia('(prefers-color-scheme: dark)').matches : setting !== 'light';
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  })();
+</script>
 <link rel="stylesheet" href="/static/dashboard/dashboard.css">
 </head>
 <body>
-<main class="wrap">
-  <header class="head">
-    <img src="/icons/app-icon.png" alt="">
-    <div class="head-text">
-      <h1>DanceRMD</h1>
-      <p class="muted" id="sub"></p>
-    </div>
-    <span class="badge" id="status"><span class="dot"></span><span id="status-text" data-i18n="dash.status.starting">Starting…</span></span>
-  </header>
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M14 21h3M20 18v3"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M12 20h.01M2 8.82a15 15 0 0 1 20 0M5 12.86a10 10 0 0 1 14 0M8.5 16.43a5 5 0 0 1 7 0"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></symbol>
+  <symbol id="i-unplug" viewBox="0 0 24 24"><path d="m19 5 3-3M2 22l3-3"/><path d="M6.3 20.3a2.4 2.4 0 0 0 3.4 0L12 18l-6-6-2.3 2.3a2.4 2.4 0 0 0 0 3.4ZM7.5 13.5 10 11M10.5 16.5 13 14"/><path d="m12 6 6 6 2.3-2.3a2.4 2.4 0 0 0 0-3.4l-2.6-2.6a2.4 2.4 0 0 0-3.4 0Z"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+  <symbol id="i-languages" viewBox="0 0 24 24"><path d="m5 8 6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.65-.75 1.65-1.69 0-.44-.18-.83-.44-1.12-.29-.29-.44-.65-.44-1.13a1.64 1.64 0 0 1 1.67-1.67h2c3.05 0 5.55-2.5 5.55-5.55C21.97 6.01 17.46 2 12 2z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7" r="1"/><circle cx="16.5" cy="10.5" r="1"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68M6.61 6.61A13.53 13.53 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61M2 2l20 20M14.12 14.12a3 3 0 1 1-4.24-4.24"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/></symbol>
+  <symbol id="i-wall" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 9v6M16 15v6M16 3v6M3 15h18M3 9h18M8 15v6M8 3v6"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></symbol>
+</svg>
 
-  <div class="grid">
-    <section class="card qr-card" aria-labelledby="qr-title">
-      <h2 id="qr-title" data-i18n="dash.scan">Scan to connect</h2>
-      <div class="qr" id="qr" role="img" data-i18n-attr="aria-label:dash.qr"></div>
-      <label class="field-label" for="addr" data-i18n="dash.address">Address</label>
-      <select id="addr"></select>
-      <p class="url" id="url"></p>
-      <p class="muted small" id="addr-hint"></p>
-      <button type="button" class="btn" id="copy-link" data-i18n="dash.copy_link">Copy link</button>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="/icons/app-icon.png" alt="" width="34" height="34">
+      <span class="brand-name">DanceRMD</span>
+    </div>
+    <nav class="nav" data-i18n-attr="aria-label:dash.nav.label" aria-label="Main">
+      <a class="nav-item" href="#connect" data-page="connect">
+        <svg class="i" aria-hidden="true"><use href="#i-qr"/></svg>
+        <span class="nav-label" data-i18n="dash.nav.connect">Connect</span>
+        <span class="nav-badge" id="nav-count" hidden></span>
+      </a>
+      <a class="nav-item" href="#settings" data-page="settings">
+        <svg class="i" aria-hidden="true"><use href="#i-settings"/></svg>
+        <span class="nav-label" data-i18n="dash.nav.settings">Settings</span>
+      </a>
+    </nav>
+    <div class="sidebar-foot">
+      <p class="status" id="status" data-state="starting" role="status">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="status-text" id="status-text" data-i18n="dash.status.starting">Starting…</span>
+      </p>
+      <p class="version" id="version"></p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- ============================== Connect ============================== -->
+    <section class="page" id="page-connect" aria-labelledby="connect-title">
+      <header class="page-head">
+        <h1 id="connect-title" tabindex="-1" data-i18n="dash.connect.title">Connect your phone</h1>
+        <p class="page-sub" id="connect-sub"></p>
+      </header>
+
+      <div class="connect-grid">
+        <section class="card scan" id="scan" aria-labelledby="scan-title">
+          <h2 id="scan-title" data-i18n="dash.scan">Scan to connect</h2>
+          <div class="segmented" id="scan-tabs" role="tablist" data-i18n-attr="aria-label:dash.mode.label">
+            <button type="button" role="tab" id="tab-lan" data-mode="lan" aria-controls="scan-panel" aria-selected="true">
+              <svg class="i" aria-hidden="true"><use href="#i-wifi"/></svg><span data-i18n="dash.mode.lan">Same Wi-Fi</span>
+            </button>
+            <button type="button" role="tab" id="tab-remote" data-mode="remote" aria-controls="scan-panel" aria-selected="false" tabindex="-1">
+              <svg class="i" aria-hidden="true"><use href="#i-globe"/></svg><span data-i18n="dash.mode.remote">Over the Internet</span>
+            </button>
+          </div>
+
+          <div class="scan-panel" id="scan-panel" role="tabpanel" aria-labelledby="tab-lan">
+            <div class="qr-box">
+              <div class="qr" id="qr" role="img" data-i18n-attr="aria-label:dash.qr"></div>
+              <div class="qr-off" id="qr-off" data-state="off" hidden>
+                <svg class="i qr-off-icon" aria-hidden="true"><use href="#i-globe"/></svg>
+                <span class="spinner" aria-hidden="true"></span>
+                <h3 id="qr-off-title"></h3>
+                <p id="qr-off-text"></p>
+                <button type="button" class="btn primary" id="qr-off-action">
+                  <svg class="i" aria-hidden="true"><use href="#i-globe"/></svg><span></span>
+                </button>
+              </div>
+            </div>
+
+            <div class="field" id="adapter-field" hidden>
+              <label for="adapter" data-i18n="dash.adapter">Network adapter</label>
+              <select id="adapter"></select>
+            </div>
+
+            <div class="link-info" id="link-info">
+              <div class="address">
+                <span class="address-label" data-i18n="dash.address">Address</span>
+                <code id="link-address"></code>
+              </div>
+              <p class="hint"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span id="link-hint"></span></p>
+            </div>
+
+            <button type="button" class="btn primary block" id="copy-link">
+              <svg class="i" aria-hidden="true"><use href="#i-link"/></svg><span data-i18n="dash.copy_link">Copy connection link</span>
+            </button>
+          </div>
+        </section>
+
+        <div class="col">
+          <section class="card" aria-labelledby="dev-title">
+            <div class="card-head">
+              <h2 id="dev-title" data-i18n="dash.devices">Connected phones</h2>
+              <span class="count" id="dev-count">0</span>
+            </div>
+            <ul class="devices" id="devices"></ul>
+            <div class="empty" id="dev-empty">
+              <svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>
+              <div>
+                <p class="empty-title" data-i18n="dash.no_devices">No phone connected yet</p>
+                <p class="muted" data-i18n="dash.no_devices_hint">Open your phone’s camera and scan the QR code.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" aria-labelledby="remote-title">
+            <div class="card-head">
+              <div>
+                <h2 id="remote-title" data-i18n="dash.remote">Remote access</h2>
+                <p class="muted" id="remote-short" data-i18n="dash.remote_short"></p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" role="switch" id="tunnel" aria-labelledby="remote-title" aria-describedby="remote-short">
+                <span aria-hidden="true"></span>
+              </label>
+            </div>
+            <p class="tunnel-status" id="tunnel-status" data-state="off" hidden>
+              <span class="dot" aria-hidden="true"></span><span id="tunnel-text"></span>
+            </p>
+            <details class="more">
+              <summary><span data-i18n="dash.remote_more">How it works</span><svg class="i" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+              <p data-i18n-html="dash.remote_desc"></p>
+            </details>
+          </section>
+
+          <section class="card" aria-labelledby="help-title">
+            <div class="card-head">
+              <h2 id="help-title" data-i18n="dash.help">Can’t connect?</h2>
+            </div>
+            <div class="help-list">
+              <details class="help-item">
+                <summary>
+                  <svg class="i" aria-hidden="true"><use href="#i-wifi"/></svg>
+                  <span data-i18n="dash.help.wifi">Check the Wi-Fi network</span>
+                  <svg class="i chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+                </summary>
+                <div class="help-body"><p data-i18n="dash.help.wifi_text"></p></div>
+              </details>
+              <details class="help-item">
+                <summary>
+                  <svg class="i" aria-hidden="true"><use href="#i-wall"/></svg>
+                  <span data-i18n="dash.help.firewall">Allow it through Windows Firewall</span>
+                  <svg class="i chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+                </summary>
+                <div class="help-body">
+                  <p id="help-firewall-text"></p>
+                  <button type="button" class="btn" data-action="firewall">
+                    <svg class="i" aria-hidden="true"><use href="#i-wall"/></svg><span data-i18n="dash.firewall_btn">Open port</span>
+                  </button>
+                </div>
+              </details>
+              <details class="help-item">
+                <summary>
+                  <svg class="i" aria-hidden="true"><use href="#i-globe"/></svg>
+                  <span data-i18n="dash.help.remote">On public or office Wi-Fi</span>
+                  <svg class="i chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+                </summary>
+                <div class="help-body">
+                  <p data-i18n="dash.help.remote_text"></p>
+                  <button type="button" class="btn" id="help-remote">
+                    <svg class="i" aria-hidden="true"><use href="#i-globe"/></svg><span data-i18n="dash.help.remote_btn">Use remote access</span>
+                  </button>
+                </div>
+              </details>
+            </div>
+          </section>
+        </div>
+      </div>
     </section>
 
-    <div class="stack">
-      <section class="card" aria-labelledby="dev-title">
-        <div class="card-head">
-          <h2 id="dev-title" data-i18n="dash.devices">Connected phones</h2>
-          <span class="count" id="dev-count">0</span>
-        </div>
-        <ul class="devices" id="devices"></ul>
-        <p class="empty" id="dev-empty" data-i18n="dash.no_devices"></p>
-      </section>
+    <!-- ============================== Settings ============================== -->
+    <section class="page" id="page-settings" aria-labelledby="settings-title" hidden>
+      <header class="page-head">
+        <h1 id="settings-title" tabindex="-1" data-i18n="dash.settings.title">Settings</h1>
+        <p class="page-sub" data-i18n="dash.settings.sub">Choose how DanceRMD runs on this PC.</p>
+      </header>
 
-      <section class="card" aria-labelledby="remote-title">
-        <div class="card-head">
-          <h2 id="remote-title" data-i18n="dash.remote">Remote access</h2>
-          <label class="switch"><input type="checkbox" id="tunnel" data-i18n-attr="aria-label:dash.remote_toggle"><span></span></label>
-        </div>
-        <p class="muted small" data-i18n-html="dash.remote_desc"></p>
-        <p class="tunnel-status" id="tunnel-status" hidden><span class="dot"></span><span id="tunnel-text"></span></p>
-      </section>
+      <div class="settings">
+        <section class="card group" aria-labelledby="group-general">
+          <h2 id="group-general" data-i18n="dash.group.general">General</h2>
+          <div class="setting">
+            <svg class="i" aria-hidden="true"><use href="#i-monitor"/></svg>
+            <div class="setting-text">
+              <p class="setting-title" id="autostart-title" data-i18n="dash.autostart">Start with Windows</p>
+              <p id="autostart-desc" data-i18n="dash.autostart_desc"></p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" role="switch" id="autostart" aria-labelledby="autostart-title" aria-describedby="autostart-desc">
+              <span aria-hidden="true"></span>
+            </label>
+          </div>
+          <div class="setting">
+            <svg class="i" aria-hidden="true"><use href="#i-languages"/></svg>
+            <div class="setting-text">
+              <label class="setting-title" for="language" data-i18n="dash.language">Language</label>
+              <p data-i18n="dash.language_desc"></p>
+            </div>
+            <select id="language">
+              <option value="en">English</option>
+              <option value="vi">Tiếng Việt</option>
+              <option value="auto" data-i18n="dash.lang_system">Same as Windows</option>
+            </select>
+          </div>
+          <div class="setting">
+            <svg class="i" aria-hidden="true"><use href="#i-palette"/></svg>
+            <div class="setting-text">
+              <p class="setting-title" id="theme-title" data-i18n="dash.theme">Theme</p>
+              <p id="theme-desc" data-i18n="dash.theme_desc"></p>
+            </div>
+            <div class="segmented compact" id="theme" role="radiogroup" aria-labelledby="theme-title" aria-describedby="theme-desc">
+              <button type="button" role="radio" data-value="dark" aria-checked="true">
+                <svg class="i" aria-hidden="true"><use href="#i-moon"/></svg><span data-i18n="dash.theme.dark">Dark</span>
+              </button>
+              <button type="button" role="radio" data-value="light" aria-checked="false" tabindex="-1">
+                <svg class="i" aria-hidden="true"><use href="#i-sun"/></svg><span data-i18n="dash.theme.light">Light</span>
+              </button>
+              <button type="button" role="radio" data-value="system" aria-checked="false" tabindex="-1">
+                <svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg><span data-i18n="dash.theme.system">System</span>
+              </button>
+            </div>
+          </div>
+          <div class="setting" id="install-row" hidden>
+            <svg class="i" aria-hidden="true"><use href="#i-download"/></svg>
+            <div class="setting-text">
+              <p class="setting-title" data-i18n="dash.install">Install on this PC</p>
+              <p id="install-desc"></p>
+            </div>
+            <button type="button" class="btn" id="install">
+              <svg class="i" aria-hidden="true"><use href="#i-download"/></svg><span data-i18n="dash.install_btn">Install</span>
+            </button>
+            <span class="badge ok" id="installed-badge" hidden>
+              <svg class="i" aria-hidden="true"><use href="#i-check-circle"/></svg><span data-i18n="dash.installed_badge">Installed</span>
+            </span>
+          </div>
+        </section>
 
-      <section class="card" aria-labelledby="token-title">
-        <h2 id="token-title" data-i18n="dash.token">Access code</h2>
-        <div class="token-row">
-          <code id="token">••••••••••••••••</code>
-          <button type="button" class="btn" id="reveal" aria-pressed="false" data-i18n="dash.show">Show</button>
-          <button type="button" class="btn danger" id="rotate" data-i18n="dash.rotate">Change code</button>
-        </div>
-        <p class="muted small" data-i18n="dash.token_desc"></p>
-      </section>
+        <section class="card group" id="group-admin" aria-labelledby="group-permissions" hidden>
+          <h2 id="group-permissions" data-i18n="dash.group.permissions">Permissions</h2>
+          <div class="setting">
+            <svg class="i" aria-hidden="true"><use href="#i-shield"/></svg>
+            <div class="setting-text">
+              <p class="setting-title" id="admin-title" data-i18n="dash.admin">Run as administrator</p>
+              <p id="admin-desc" data-i18n="dash.admin_desc"></p>
+              <p class="note" id="admin-note">
+                <svg class="i" aria-hidden="true"><use href="#i-alert"/></svg><span id="admin-note-text"></span>
+              </p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" role="switch" id="admin" aria-labelledby="admin-title" aria-describedby="admin-desc admin-note-text">
+              <span aria-hidden="true"></span>
+            </label>
+          </div>
+        </section>
 
-      <section class="card" aria-labelledby="opt-title">
-        <h2 id="opt-title" data-i18n="dash.options">Options</h2>
-        <div class="opt">
-          <div>
-            <b data-i18n="dash.autostart">Start with Windows</b>
-            <p class="muted small" data-i18n="dash.autostart_desc"></p>
+        <section class="card group" aria-labelledby="group-security">
+          <h2 id="group-security" data-i18n="dash.group.security">Security</h2>
+          <div class="setting">
+            <svg class="i" aria-hidden="true"><use href="#i-lock"/></svg>
+            <div class="setting-text">
+              <p class="setting-title" id="token-title" data-i18n="dash.token">Access code</p>
+              <p data-i18n="dash.token_desc"></p>
+              <div class="token-row">
+                <code id="token" aria-labelledby="token-title">••••••••••••••••</code>
+                <button type="button" class="btn" id="reveal" aria-pressed="false">
+                  <svg class="i" aria-hidden="true"><use href="#i-eye"/></svg><span data-i18n="dash.show">Show</span>
+                </button>
+                <button type="button" class="btn danger" id="rotate">
+                  <svg class="i" aria-hidden="true"><use href="#i-refresh"/></svg><span data-i18n="dash.rotate">Change code</span>
+                </button>
+              </div>
+            </div>
           </div>
-          <label class="switch"><input type="checkbox" id="autostart" data-i18n-attr="aria-label:dash.autostart"><span></span></label>
-        </div>
-        <div class="opt" id="admin-row" hidden>
-          <div>
-            <b data-i18n="dash.admin">Run as administrator</b>
-            <p class="muted small" id="admin-desc"></p>
-          </div>
-          <label class="switch"><input type="checkbox" id="admin" data-i18n-attr="aria-label:dash.admin"><span></span></label>
-        </div>
-        <div class="opt" id="install-row" hidden>
-          <div>
-            <b data-i18n="dash.install">Install on this PC</b>
-            <p class="muted small" id="install-desc"></p>
-          </div>
-          <button type="button" class="btn" id="install" data-i18n="dash.install_btn">Install</button>
-        </div>
-        <div class="opt">
-          <div>
-            <b data-i18n="dash.firewall">Open the firewall port</b>
-            <p class="muted small" data-i18n="dash.firewall_desc"></p>
-          </div>
-          <button type="button" class="btn" id="firewall" data-i18n="dash.firewall_btn">Open port</button>
-        </div>
-        <div class="opt">
-          <div>
-            <label for="language"><b data-i18n="dash.language">Language</b></label>
-            <p class="muted small" data-i18n="dash.language_desc"></p>
-          </div>
-          <select id="language">
-            <option value="auto" data-i18n="lang.auto">Automatic</option>
-            <option value="en">English</option>
-            <option value="vi">Tiếng Việt</option>
-          </select>
-        </div>
-      </section>
+        </section>
 
-      <details class="card help">
-        <summary data-i18n="dash.help">Phone can’t connect?</summary>
-        <ol>
-          <li data-i18n="dash.help1"></li>
-          <li data-i18n-html="dash.help2"></li>
-          <li data-i18n-html="dash.help3"></li>
-        </ol>
-      </details>
+        <section class="card group" aria-labelledby="group-network">
+          <h2 id="group-network" data-i18n="dash.group.network">Network</h2>
+          <div class="setting">
+            <svg class="i" aria-hidden="true"><use href="#i-wall"/></svg>
+            <div class="setting-text">
+              <p class="setting-title" data-i18n="dash.firewall">Windows Firewall</p>
+              <p id="firewall-desc"></p>
+            </div>
+            <button type="button" class="btn" data-action="firewall">
+              <svg class="i" aria-hidden="true"><use href="#i-wall"/></svg><span data-i18n="dash.firewall_btn">Open port</span>
+            </button>
+          </div>
+        </section>
+
+        <details class="card group tech">
+          <summary>
+            <svg class="i" aria-hidden="true"><use href="#i-cpu"/></svg>
+            <span data-i18n="dash.group.tech">Technical details</span>
+            <svg class="i chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </summary>
+          <dl class="specs">
+            <dt data-i18n="dash.spec.version">Version</dt><dd id="spec-version"></dd>
+            <dt data-i18n="dash.spec.port">Port</dt><dd id="spec-port"></dd>
+            <dt data-i18n="dash.spec.capture">Screen capture</dt><dd id="spec-capture"></dd>
+            <dt data-i18n="dash.spec.encoder">Video encoder</dt><dd id="spec-encoder"></dd>
+            <dt data-i18n="dash.spec.data">Settings folder</dt><dd><code id="spec-data"></code></dd>
+          </dl>
+        </details>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog class="dialog" id="confirm" aria-labelledby="confirm-title" aria-describedby="confirm-text">
+  <form method="dialog">
+    <div class="dialog-body">
+      <span class="dialog-icon" aria-hidden="true"><svg class="i"><use href="#i-alert"/></svg></span>
+      <div>
+        <h2 id="confirm-title"></h2>
+        <p id="confirm-text"></p>
+      </div>
     </div>
-  </div>
-  <footer class="muted small" id="footer"></footer>
-</main>
-<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <div class="dialog-actions">
+      <button type="submit" class="btn" value="cancel" autofocus data-i18n="dash.cancel">Cancel</button>
+      <button type="submit" class="btn danger-solid" value="ok" id="confirm-ok"></button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden>
+  <svg class="i" aria-hidden="true"><use href="#i-check-circle"/></svg><span id="toast-text"></span>
+</div>
 
 <script src="/static/shared/i18n.js"></script>
 <script src="/static/shared/locales/en.js"></script>

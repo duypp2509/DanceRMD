@@ -72,3 +72,28 @@ def test_rotating_the_token_changes_it():
         finally:
             await client.close()
     run(scenario())
+
+
+def test_dashboard_defaults_to_english_and_the_dark_theme():
+    async def scenario():
+        client, _ = await _client()
+        try:
+            state = await (await client.get("/api/state")).json()
+            assert state["language_setting"] == "en" and state["language"] == "en"
+            assert state["theme"] == "dark"
+        finally:
+            await client.close()
+    run(scenario())
+
+
+def test_theme_is_saved_and_validated():
+    async def scenario():
+        client, _ = await _client()
+        try:
+            state = await (await client.post("/api/theme", json={"theme": "light"})).json()
+            assert state["theme"] == "light" and config.load()["theme"] == "light"
+            resp = await client.post("/api/theme", json={"theme": "pink"})
+            assert resp.status == 400 and config.load()["theme"] == "light"
+        finally:
+            await client.close()
+    run(scenario())

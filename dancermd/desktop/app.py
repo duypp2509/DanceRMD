@@ -68,9 +68,12 @@ class DesktopApp:
             return
         log.info("%s %s (desktop) listening on port %s", APP_NAME, VERSION, self.port)
 
-        theme = "dark" if windows_uses_dark_theme() else "light"
+        # Paint the window in the dashboard's theme before the page loads, so it doesn't flash
+        theme = config.theme(self.cfg)
+        if theme == "system":
+            theme = "dark" if windows_uses_dark_theme() else "light"
         self.window = webview.create_window(
-            APP_NAME, f"http://127.0.0.1:{self.port}/dashboard", width=1020, height=760, min_size=(720, 560),
+            APP_NAME, f"http://127.0.0.1:{self.port}/dashboard", width=1040, height=760, min_size=(720, 560),
             hidden=bool(self.start_hidden), background_color=WINDOW_BACKGROUND[theme])
         self.window.events.closing += self.on_closing
 

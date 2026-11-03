@@ -36,7 +36,7 @@ def main():
     # Group taskbar buttons under this app (not python.exe when running from source)
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(f"{APP_ID}.Desktop")
     cfg = config.load()
-    i18n.set_language(cfg.get("language", "auto"))
+    i18n.set_language(cfg.get("language", config.DEFAULT_LANGUAGE))
     port = args.port or cfg.get("port", config.DEFAULT_PORT)
     try:
         if args.uninstall:
