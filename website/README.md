@@ -49,7 +49,7 @@ Requires Pillow. Re-run it whenever the artwork changes and commit the results.
 that touches `website/**` (or manually via *Run workflow*). One-time setup in the repository:
 **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
-The site is then served at `https://duypham-dev.github.io/DanceRMD/`.
+The site is then served at `https://duypp2509.github.io/DanceRMD/`.
 
 ## Changing the repository or domain
 

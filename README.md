@@ -11,16 +11,16 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/duypham-dev/DanceRMD/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/duypham-dev/DanceRMD/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="https://github.com/duypham-dev/DanceRMD/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/duypham-dev/DanceRMD?color=ff8a3d"></a>
+  <a href="https://github.com/duypp2509/DanceRMD/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/duypp2509/DanceRMD/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/duypp2509/DanceRMD/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/duypp2509/DanceRMD?color=ff8a3d"></a>
   <img alt="Platform: Windows 10/11" src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-1f1712">
   <img alt="Python 3.10+" src="https://img.shields.io/badge/python-3.10%2B-1f1712">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-ffb238"></a>
 </p>
 
 <p align="center">
-  <a href="https://duypham-dev.github.io/DanceRMD/">Website</a> ·
-  <a href="https://github.com/duypham-dev/DanceRMD/releases/latest">Download</a> ·
+  <a href="https://duypp2509.github.io/DanceRMD/">Website</a> ·
+  <a href="https://github.com/duypp2509/DanceRMD/releases/latest">Download</a> ·
   <a href="docs/architecture.md">Architecture</a> ·
   <a href="docs/protocol.md">Protocol</a> ·
   <a href="CHANGELOG.md">Changelog</a>
@@ -55,7 +55,7 @@
 
 ## Getting started
 
-1. Download **`DanceRMD.exe`** from the [latest release](https://github.com/duypham-dev/DanceRMD/releases/latest) (Windows 10/11, 64-bit).
+1. Download **`DanceRMD.exe`** from the [latest release](https://github.com/duypp2509/DanceRMD/releases/latest) (Windows 10/11, 64-bit).
 2. Open it and choose **Yes** to install. It is a per-user install: no administrator rights, and it appears in the Start menu and in *Settings > Apps*.
 3. Scan the QR code in the DanceRMD window with your phone's camera.
 

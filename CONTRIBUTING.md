@@ -4,7 +4,7 @@ Thanks for helping improve DanceRMD! Bug reports, translations and pull requests
 
 ## Reporting bugs and ideas
 
-Open an [issue](https://github.com/duypham-dev/DanceRMD/issues/new/choose) and include:
+Open an [issue](https://github.com/duypp2509/DanceRMD/issues/new/choose) and include:
 
 - the DanceRMD version (dashboard footer), Windows version and GPU,
 - the phone model and browser, and whether you used the Wi-Fi or the remote link,

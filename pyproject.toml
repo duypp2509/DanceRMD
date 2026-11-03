@@ -37,10 +37,10 @@ dependencies = [
 dev = ["pytest>=8", "ruff>=0.6", "pyinstaller>=6"]
 
 [project.urls]
-Homepage = "https://duypham-dev.github.io/DanceRMD/"
-Repository = "https://github.com/duypham-dev/DanceRMD"
-Issues = "https://github.com/duypham-dev/DanceRMD/issues"
-Changelog = "https://github.com/duypham-dev/DanceRMD/blob/main/CHANGELOG.md"
+Homepage = "https://duypp2509.github.io/DanceRMD/"
+Repository = "https://github.com/duypp2509/DanceRMD"
+Issues = "https://github.com/duypp2509/DanceRMD/issues"
+Changelog = "https://github.com/duypp2509/DanceRMD/blob/main/CHANGELOG.md"
 
 [project.gui-scripts]
 dancermd = "dancermd.__main__:run"

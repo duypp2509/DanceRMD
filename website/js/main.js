@@ -2,7 +2,7 @@
 'use strict';
 
 /** The single place to change when the repository moves. */
-const REPO_URL = 'https://github.com/duypham-dev/DanceRMD';
+const REPO_URL = 'https://github.com/duypp2509/DanceRMD';
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 

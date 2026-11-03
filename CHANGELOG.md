@@ -48,4 +48,4 @@ Milestones before 1.3.0, oldest first:
 - "Run as administrator" mode through a scheduled task, and a warning on the phone when an elevated
   window blocks input (UIPI).
 
-[2.0.0]: https://github.com/duypham-dev/DanceRMD/releases/tag/v2.0.0
+[2.0.0]: https://github.com/duypp2509/DanceRMD/releases/tag/v2.0.0

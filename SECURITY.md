@@ -29,7 +29,7 @@ what protects that code and the PC, the known limits, and how to report a vulner
 ## Reporting a vulnerability
 
 Please do not open a public issue. Use GitHub's
-[private vulnerability reporting](https://github.com/duypham-dev/DanceRMD/security/advisories/new) with
+[private vulnerability reporting](https://github.com/duypp2509/DanceRMD/security/advisories/new) with
 the affected version, the steps to reproduce and the impact. You can expect an acknowledgement within
 a week. Fixes are released as a new version and credited in the changelog unless you prefer otherwise.
 
