@@ -85,6 +85,33 @@ function setupCodeRain() {
   host.append(fragment);
 }
 
+/**
+ * Play the product video while it is on screen and pause it when scrolled away, so it only downloads
+ * once someone gets there. A visitor's own pause is respected; reduced motion means no autoplay.
+ */
+function setupVideo() {
+  const video = document.querySelector('video[data-autoplay]');
+  if (!video || prefersReducedMotion.matches || !('IntersectionObserver' in window)) return;
+  let pausedByScroll = false;
+  let pausedByVisitor = false;
+  video.addEventListener('pause', () => {
+    if (!pausedByScroll) pausedByVisitor = true;
+    pausedByScroll = false;
+  });
+  video.addEventListener('play', () => {
+    pausedByVisitor = false;
+  });
+  const observer = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      if (!pausedByVisitor) video.play().catch(() => {});
+    } else if (!video.paused) {
+      pausedByScroll = true;
+      video.pause();
+    }
+  }, { threshold: 0.5 });
+  observer.observe(video);
+}
+
 function setYear() {
   document.querySelectorAll('[data-year]').forEach((node) => {
     node.textContent = String(new Date().getFullYear());
@@ -95,4 +122,5 @@ wireRepoLinks();
 setupNavigation();
 setupReveal();
 setupCodeRain();
+setupVideo();
 setYear();

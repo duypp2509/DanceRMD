@@ -12,8 +12,8 @@ website/
 ├── 404.html            Not-found page (self-contained styles)
 ├── robots.txt
 ├── css/styles.css      All styles; design tokens live at the top in :root
-├── js/main.js          Progressive enhancements: mobile menu, scroll reveal, code rain
-├── assets/             Logos, favicons, Open Graph card, mascot (generated)
+├── js/main.js          Progressive enhancements: mobile menu, scroll reveal, code rain, video autoplay
+├── assets/             Logos, favicons, Open Graph card, mascot (generated), product video
 └── tools/make_assets.py
 ```
 
@@ -42,6 +42,19 @@ python website/tools/make_assets.py
 ```
 
 Requires Pillow. Re-run it whenever the artwork changes and commit the results.
+
+The product video (`assets/promo.mp4` and its poster `assets/promo-poster.jpg`) is not made by
+that script. It is rendered from the Remotion project in `video/`, then compressed for the web:
+
+```bash
+cd video && npm run render && cd ..
+ffmpeg -i video/out/DanceRMD-promo.mp4 -an -vf "scale=out_range=tv,format=yuv420p" \
+  -c:v libx264 -preset slow -crf 25 -movflags +faststart website/assets/promo.mp4
+ffmpeg -ss 3.47 -i video/out/DanceRMD-promo.mp4 -frames:v 1 -q:v 4 website/assets/promo-poster.jpg
+```
+
+On the page the video starts when it scrolls into view and pauses when it leaves, so it only
+downloads for visitors who reach it. With reduced motion it does not autoplay.
 
 ## Deployment
 
