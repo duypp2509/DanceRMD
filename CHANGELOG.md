@@ -4,7 +4,7 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [2.1.0] - 2026-11-07
 
 ### Added
 - Theme setting for the desktop app: dark (default), light, or follow Windows.
@@ -60,4 +60,5 @@ Milestones before 1.3.0, oldest first:
 - "Run as administrator" mode through a scheduled task, and a warning on the phone when an elevated
   window blocks input (UIPI).
 
+[2.1.0]: https://github.com/duypp2509/DanceRMD/releases/tag/v2.1.0
 [2.0.0]: https://github.com/duypp2509/DanceRMD/releases/tag/v2.0.0
